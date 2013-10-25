@@ -1,0 +1,8 @@
+<!--! <example xn="JAX_WS_CATALOG_XML"> -->
+<!--! <c>chap08</c><s>catalog</s> -->
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+  <system
+    systemId="http://someplace/myService?wsdl"
+    uri="http://localhost:8080/chap08-catalog-mywebservice-nowebxml/MyWebService?wsdl"/>
+</catalog>
+<!--! </example> -->

@@ -1,0 +1,23 @@
+<PurchaseOrder xmlns="http://javector.com/ser/adaptive/po">
+    <billTo>
+        <street>7983 Plaza de Embarcadaro</street>
+        <city>San Antonio</city>
+        <state>TX</state>
+        <zip>64883</zip>
+        <phone>(512) 443-7866</phone>
+    </billTo>
+    <items>
+        <item productName="Potato Chips">
+            <quantity>0</quantity>
+            <price>2.19</price>
+        </item>
+        <item productName="Pretzels">
+            <quantity>0</quantity>
+            <price>1.09</price>
+        </item>
+        <item productName="Diet Coke">
+            <quantity>0</quantity>
+            <price>6.49</price>
+        </item>
+    </items>
+</PurchaseOrder>

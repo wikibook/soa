@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="SUN_EJB_JAR_XML"> -->
+<!--! <c>chap08</c><s>descriptor</s> -->
+<sun-ejb-jar>
+  <enterprise-beans>
+    <ejb>
+      <ejb-name>MyHelloEJB</ejb-name>
+      <webservice-endpoint>
+        <port-component-name>Hello</port-component-name>
+        <endpoint-address-uri>/my/endpoint/url</endpoint-address-uri>
+      </webservice-endpoint>
+    </ejb>
+  </enterprise-beans>
+</sun-ejb-jar>
+<!--! </example> -->

@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<!--! <example xn="OrderSchemaFragment"> -->
+<!--! <c>chap03</c><s>eisrecords</s> -->
+<schema targetNamespace="http://www.example.com/oms"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:oms="http://www.example.com/oms" version="1.0"
+  elementFormDefault="qualified">
+  <element name="Orders" type="oms:OrdersType"/>
+  <element name="Order" type="oms:OrderType"/>
+  <complexType name="OrdersType">
+    <sequence>
+      <element ref="oms:Order" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <complexType name="OrderType">
+    <annotation>
+      <documentation>A Customer Order</documentation>
+    </annotation>
+    <sequence>
+      <element name="OrderKey">
+        <annotation>
+          <documentation>
+Unique Sales Document Identifier
+          </documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="10"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="OrderHeader" type="oms:BUSOBJ_HEADER">
+        <annotation>
+          <documentation>
+Order Header referencing customer, payment, sale organization information.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="OrderItems">
+        <annotation>
+          <documentation>Items in the Order</documentation>
+        </annotation>
+        <complexType>
+          <sequence>
+            <element name="item" type="oms:BUSOBJ_ITEM"
+              maxOccurs="unbounded"/>
+          </sequence>
+        </complexType>
+      </element>
+<!--! </example> -->
+      <element name="OrderCcard" minOccurs="0">
+        <annotation>
+          <documentation>Credit Card Data</documentation>
+        </annotation>
+        <complexType>
+          <sequence>
+            <element name="ccard" type="oms:BUSOBJ_CCARD" minOccurs="0"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="OrderText" minOccurs="0">
+        <annotation>
+          <documentation>Short description of Order.</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="255"/>
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="BUSOBJ_HEADER">
+    <annotation>
+      <documentation>Sales and Distribution Document Header</documentation>
+    </annotation>
+    <sequence>
+      <element name="SALES_ORG" minOccurs="0">
+        <annotation>
+          <documentation>Sales organization</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="4"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="PURCH_DATE">
+        <annotation>
+          <documentation>Date that customer placed the order</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <pattern value="....-..-.."/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="CUST_NO">
+        <annotation>
+          <documentation>Unique customer identifier</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="10"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="PYMT_METH">
+        <annotation>
+          <documentation>Payment method</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <enumeration value="PO"/>
+            <enumeration value="CC"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="PURCH_ORD_NO" minOccurs="0">
+        <annotation>
+          <documentation>Customer purchase order number</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="35"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="WAR_DEL_DATE" minOccurs="0">
+        <annotation>
+          <documentation>Guarantee delivery date</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <pattern value="....-..-.."/>
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="BUSOBJ_ITEM">
+    <annotation>
+      <documentation>Sales and Distribution Document Item</documentation>
+    </annotation>
+    <sequence>
+      <element name="ITM_NUMBER">
+        <annotation>
+          <documentation>Unique identifier for an item.</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="6"/>
+            <pattern value="\d+"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="STORAGE_LOC" minOccurs="0">
+        <annotation>
+          <documentation>Storage location</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="4"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="TARGET_QTY">
+        <annotation>
+          <documentation>Target quantity in sales units</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="decimal">
+            <totalDigits value="13"/>
+            <fractionDigits value="3"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="TARGET_UOM">
+        <annotation>
+          <documentation>Target quantity Unit of Measure</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="3"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="PRICE_PER_UOM">
+        <annotation>
+          <documentation>Price per unit of measure in US dollars</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="decimal">
+            <totalDigits value="10"/>
+            <fractionDigits value="2"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="SHORT_TEXT" minOccurs="0">
+        <annotation>
+          <documentation>Short text describing sales order item</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="40"/>
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="BUSOBJ_CCARD">
+    <annotation>
+      <documentation>Credit Card Information</documentation>
+    </annotation>
+    <sequence>
+      <element name="CC_TYPE">
+        <annotation>
+          <documentation>Payment cards: Card type</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="4"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="CC_NUMBER">
+        <annotation>
+          <documentation>Payment cards: Card number</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="25"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="CC_EXPIRE_DATE">
+        <annotation>
+          <documentation>Payment cards: Expiration date</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <pattern value="....-..-.."/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="CC_NAME">
+        <annotation>
+          <documentation>Payment cards: Name of cardholder</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="40"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="BILLAMOUNT" minOccurs="0">
+        <annotation>
+          <documentation>Value to be billed on the date specified in billing plan</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="decimal">
+            <totalDigits value="12"/>
+            <fractionDigits value="2"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="CHARGE_DATE" minOccurs="0">
+        <annotation>
+          <documentation>Date that card is charged</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <pattern value="....-..-.."/>
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+</schema>

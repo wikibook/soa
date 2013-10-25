@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="corp_address_xml"> -->
+<!--! <c>chap04</c><s>sfwj</s> -->
+<custinfo:address xmlns="http://www.example.com/corp"
+  xmlns:custinfo="http://www.example.com/css/custinfo">
+  <addrLine1>175 Main Street</addrLine1>
+  <addrLine2>Suite 200</addrLine2>
+  <city>New City</city>
+  <state>OH</state>
+  <zip>59101</zip>
+  <phone>(758) 874-1221</phone>
+</custinfo:address>
+<!--! </example> -->

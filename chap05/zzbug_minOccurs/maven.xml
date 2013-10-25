@@ -1,0 +1,24 @@
+<project>
+  
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-jaxb2-to-classpath"/>
+    <attainGoal name="gen-java"/>
+  </preGoal>
+
+  <target name="gen-java">
+    <delete dir="${basedir}/src/java"/>
+    <mkdir dir="${basedir}/src/java"/>
+    <exec executable="${jaxb2.home}/bin/xjc.sh">
+      <arg value="-d"/>
+      <arg value="${basedir}/src/java"/>
+      <arg value="${basedir}/minOccursBug.xsd"/>
+    </exec>
+  </target>
+  
+  <goal name="gen-schema">
+    <exec executable="${jaxb2.home}/bin/schemagen.sh">
+      <arg value="${basedir}/src/java/bugs/BuggyType.java"/>
+      </exec>
+  </goal>
+
+</project>

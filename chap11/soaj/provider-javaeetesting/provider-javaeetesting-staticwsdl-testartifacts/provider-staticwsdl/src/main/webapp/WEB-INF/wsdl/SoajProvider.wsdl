@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- A static wsdl file to correspond with the SoajConfig.xml used in this test.
+ The idea is to have a test that does not depend on WSDL generation, but tests
+ the invocation and serialization components of SOAJ.  Note that the
+ soap:address has to be aligned with how the Provider gets deployed. -->
+<definitions name="SoajProvider"
+  targetNamespace="http://javector.com/soaj/provider"
+  xmlns:tns="http://javector.com/soaj/provider"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:po="http://javector.com/ser/adaptive/po"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xs:schema targetNamespace="http://javector.com/ser/adaptive/po"
+      xmlns:xs="http://www.w3.org/2001/XMLSchema"
+      xmlns:test="http://javector.com/ser/adaptive/po"
+      xmlns:test1="http://javector.com/ser/adaptive/po1"
+      elementFormDefault="qualified" attributeFormDefault="unqualified">
+      <xs:element name="PurchaseOrder">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="test:billTo"/>
+            <xs:element ref="test:items"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="billToType">
+        <xs:sequence>
+          <xs:element name="street" type="xs:string"/>
+          <xs:element name="city" type="xs:string"/>
+          <xs:element name="state" type="xs:string"/>
+          <xs:element name="zip" type="xs:string"/>
+          <xs:element name="phone" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="billTo" type="test:billToType"/>
+      <xs:element name="items">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="test:item" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="item">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="quantity" type="xs:positiveInteger"/>
+            <xs:element name="price" type="xs:double"/>
+          </xs:sequence>
+          <xs:attribute name="productName" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+      targetNamespace="http://javector.com/soaj/provider"
+      elementFormDefault="qualified">
+      <xsd:import namespace="http://javector.com/ser/adaptive/po"/>
+      <element name="getBillTo">
+        <complexType>
+          <sequence>
+            <element ref="po:PurchaseOrder"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getBillToResponse">
+        <complexType>
+          <sequence>
+            <element ref="po:billTo"/>
+          </sequence>
+        </complexType>
+      </element>
+    </xsd:schema>
+  </types>
+  <message name="request">
+    <part name="parameters" element="tns:getBillTo"/>
+  </message>
+  <message name="response">
+    <part name="parameters" element="tns:getBillToResponse"/>
+  </message>
+  <portType name="SoajProviderPortType">
+    <operation name="getBillTo">
+      <input message="tns:request"/>
+      <output message="tns:response"/>
+    </operation>
+  </portType>
+  <binding name="SoajProviderBinding" type="tns:SoajProviderPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+      style="document"/>
+    <operation name="getBillTo">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="SoajProviderService">
+    <port name="SoajProviderPort" binding="tns:SoajProviderBinding">
+      <soap:address location="http://localhost:8080/provider-staticwsdl/test"/>
+    </port>
+  </service>
+</definitions>

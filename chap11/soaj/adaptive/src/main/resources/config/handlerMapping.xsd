@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://javector.com/ser/adaptive/handler" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soaj="http://javector.com/ser/adaptive/handler" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="soajAdaptiveConfiguration">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="soaj:HandlerMappings"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HandlerMappings">
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="soaj:AdaptiveContextHandler"/>
+				<xs:element ref="soaj:UtilHandlers"/>
+				<xs:element ref="soaj:SerializerHandlers"/>
+				<xs:element ref="soaj:DeserializerHandlers"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AdaptiveContextHandler">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="OverrideAdaptiveContextHandler" type="xs:string" nillable="false"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UtilHandlers">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="OverrideXpathEvaluatorHandler" type="xs:string" nillable="false"/>
+				<xs:element name="OverrideReflectionHandler" type="xs:string" nillable="false"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SerializerHandlers">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="OverrideSimpleTypeSerializerHandler" type="xs:string" nillable="false"/>
+				<xs:element name="OverrideComplexTypeSerializerHandler" type="xs:string" nillable="false"/>
+				<xs:element name="OverrideBaseAdaptiveSerializerHandler" type="xs:string" nillable="false"/>
+				<xs:element name="OverrideArrayTypeSerializerHandler" type="xs:string" nillable="false"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DeserializerHandlers">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="OverrideSimpleTypeDeserializerHandler" type="xs:string" nillable="false"/>
+				<xs:element name="OverrideComplexTypeDeserializerHandler" type="xs:string" nillable="false"/>
+				<xs:element name="OverrideBaseDeserializerHandler" type="xs:string" nillable="false"/>
+				<xs:element name="OverrideArrayTypeDeserializerHandler" type="xs:string" nillable="false"/>
+
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="chap03-client-http" basedir=".">
+  
+  <import file="${basedir}/../../../common-build.xml"/>
+  <property name="servlet-context-root" value="chap03-restget-endpoint-servlet-1.0"/>
+  <property name="jaxws-context-root" value="chap03-restget-endpoint-jaxws-1.0"/>
+
+  <!-- RUN: invoke the Servlet Version RESTful service to get new orders -->
+  <target name="run-servlet">
+    <java classname="samples.GetNewOrders" fork="true"
+      failonerror="true">
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/${servlet-context-root}/NewOrders"/>
+      <classpath>
+        <fileset dir="${basedir}/target">
+          <include name="**/*.jar"/>
+        </fileset>
+        <path refid="glassfish.webservices.path"/>
+      </classpath>
+    </java>
+  </target>
+
+  <!-- RUN: invoke the JAXWS Version of the RESTful service to get new orders -->
+  <target name="run-jaxws">
+    <java classname="samples.GetNewOrders" fork="true"
+      failonerror="true">
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/${jaxws-context-root}/NewOrders"/>
+      <classpath>
+        <fileset dir="${basedir}/target">
+          <include name="**/*.jar"/>
+        </fileset>
+        <path refid="glassfish.webservices.path"/>
+      </classpath>
+    </java>
+  </target>
+  
+</project>

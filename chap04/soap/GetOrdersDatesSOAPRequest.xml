@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="SOAP_REQUEST"> -->
+<!--! <c>chap04</c><s>soap</s> -->
+<env1:Envelope xmlns:env1="http://schemas.xmlsoap.org/soap/envelope">
+  <env1:Body>
+    <getord:getOrdersDates xmlns:getord="http://www.example.com/oms/getorders">
+      <getord:startDate>2005-11-19</getord:startDate>
+      <getord:endDate>2005-11-22</getord:endDate>
+    </getord:getOrdersDates>
+  </env1:Body>
+</env1:Envelope>
+<!--! </example> -->

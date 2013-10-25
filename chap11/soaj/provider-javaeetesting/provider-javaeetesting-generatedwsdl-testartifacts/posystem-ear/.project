@@ -1,0 +1,9 @@
+<projectDescription>
+  <name>posystem-testartifact-ear</name>
+  <comment/>
+  <projects>
+    <project>provider-testartifact-posystem</project>
+  </projects>
+  <buildSpec/>
+  <natures/>
+</projectDescription>

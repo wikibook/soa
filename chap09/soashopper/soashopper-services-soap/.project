@@ -1,0 +1,19 @@
+<projectDescription>
+  <name>soashopper-services-soap</name>
+  <comment/>
+  <projects>
+    <project>soashopper-servicesimp</project>
+    <project>soashopper-sources-generated</project>
+    <project>soashopper-engine</project>
+    <project>soashopper-services-generated</project>
+  </projects>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+      <arguments/>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="chap07-endpoint-provider-wsdl2java" basedir=".">
+  
+  <import file="${basedir}/../../../../common-build.xml"/>
+
+  <target name="wsdl2java">
+    <mkdir dir="${basedir}/target/work/java"/>
+    <mkdir dir="${basedir}/target/classes"/>
+    <exec executable="${wsimport}" failonerror="true">
+      <arg value="-d"/>
+      <arg value="${basedir}/target/classes"/>
+      <arg value="-s"/>
+      <arg value="${basedir}/target/work/java"/>
+      <arg value="-keep"/>
+      <arg value="-wsdllocation"/>
+      <arg value="WEB-INF/wsdl/RequestOrder.wsdl"/>
+      <arg value="${basedir}/../endpoint/src/webapp/WEB-INF/wsdl/RequestOrder.wsdl"/>
+    </exec>
+  </target>
+  
+</project>

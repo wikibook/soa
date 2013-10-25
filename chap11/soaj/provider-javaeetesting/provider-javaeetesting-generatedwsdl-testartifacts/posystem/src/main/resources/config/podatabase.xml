@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<purchaseOrderList xmlns="http://javector.com/ser/adaptive/po"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://javector.com/ser/adaptive/po purchaseOrder.xsd">
+  <purchaseOrder ponum="WSDLGENTEST0001">
+    <billTo>
+      <company>Johns Engine Repair</company>
+      <street>7983 Plaza de Embarcadaro</street>
+      <city>San Antonio</city>
+      <state>TX</state>
+      <zip>64883</zip>
+      <phone>(512) 443-7866</phone>
+    </billTo>
+    <items>
+      <item productName="Spanner">
+        <quantity>2</quantity>
+        <price>12.19</price>
+      </item>
+      <item productName="Bolt Cutter">
+        <quantity>1</quantity>
+        <price>8.09</price>
+      </item>
+      <item productName="WD40">
+        <quantity>12</quantity>
+        <price>6.49</price>
+      </item>
+    </items>
+  </purchaseOrder>
+  <purchaseOrder ponum="WSDLGENTEST0002">
+    <billTo>
+      <company>Octagon Marble Inc.</company>
+      <street>77 North Main St.</street>
+      <city>Calipso</city>
+      <state>ND</state>
+      <zip>89976</zip>
+      <phone>(357) 755-8876</phone>
+    </billTo>
+    <items>
+      <item productName="Tile Glue">
+        <quantity>4</quantity>
+        <price>15.44</price>
+      </item>
+      <item productName="Buffing Powder">
+        <quantity>12</quantity>
+        <price>1.09</price>
+      </item>
+      <item productName="Caulk">
+        <quantity>6</quantity>
+        <price>4.33</price>
+      </item>
+    </items>
+  </purchaseOrder>
+</purchaseOrderList>

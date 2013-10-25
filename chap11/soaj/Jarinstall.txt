@@ -1,0 +1,27 @@
+mvn install:install-file  -DgroupId=glassfish  -DartifactId=javaee  -Dversion=1.0 -Dfile=D:\glassfish\lib\javaee.jar  -Dpackaging=jar  -DgeneratePom=true
+
+----------------------------jaxb jars------------------------------------------------
+
+mvn install:install-file  -DgroupId=jaxb  -DartifactId=jaxb-api  -Dversion=2.0 -Dfile=jaxb-api.jar  -Dpackaging=jar  -DgeneratePom=true
+
+mvn install:install-file  -DgroupId=jaxb  -DartifactId=jaxb-impl  -Dversion=2.0 -Dfile=jaxb-impl.jar  -Dpackaging=jar  -DgeneratePom=true
+
+mvn install:install-file  -DgroupId=jaxb  -DartifactId=jaxb-xjc  -Dversion=2.0 -Dfile=jaxb-xjc.jar  -Dpackaging=jar  -DgeneratePom=true
+
+mvn install:install-file  -DgroupId=jaxb  -DartifactId=jsr173_1.0_api  -Dversion=2.0 -Dfile=jsr173_1.0_api.jar  -Dpackaging=jar  -DgeneratePom=true
+
+mvn install:install-file  -DgroupId=jaxb  -DartifactId=jaxb1-impl  -Dversion=2.0 -Dfile=jaxb1-impl.jar  -Dpackaging=jar  -DgeneratePom=true
+
+mvn install:install-file  -DgroupId=jaxb  -DartifactId=jaxb2-reflection  -Dversion=2.0 -Dfile=jaxb2-reflection.jar  -Dpackaging=jar  -DgeneratePom=true
+
+mvn install:install-file  -DgroupId=jaxb  -DartifactId=activation -Dversion=2.0 -Dfile=activation.jar -Dpackaging=jar  -DgeneratePom=true
+
+----------------------------------------------------------------------------------------------------------
+----------------------------soaj jars generated from xsd  ------------------------------------------------
+
+mvn install:install-file  -DgroupId=soaj  -DartifactId=activation -Dversion=2.0 -Dfile=activation.jar -Dpackaging=jar  -DgeneratePom=true
+
+
+----------------------------------------------------------------------------------------------------------
+
+

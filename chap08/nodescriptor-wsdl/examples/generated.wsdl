@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:tns="http://samples/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  targetNamespace="http://samples/">
+  <types>
+    <xsd:schema elementForDefault="qualified" targetNamespace="http://samples/">
+      <xsd:element name="sayHello">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="arg0" type="xsd:string" minOccurs="0"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sayHelloResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="return" type="xsd:string" minOccurs="0"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="sayHello">
+    <part name="parameters" element="tns:sayHello"/>
+  </message>
+  <message name="sayHelloResponse">
+    <part name="parameters" element="tns:sayHelloResponse"/>
+  </message>
+  <portType name="Hello">
+    <operation name="sayHello">
+      <input message="tns:sayHello"/>
+      <output message="tns:sayHelloResponse"/>
+    </operation>
+  </portType>
+  <binding name="HelloPortBinding" type="tns:Hello">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+      style="document"/>
+    <operation name="sayHello">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <!--! <example xn="DEFAULT_WSDL_SNIPPET_SIB_WITH_WSDL"> -->
+  <!--! <c>chap08</c><s>nodescriptor</s> -->
+  <service name="HelloService">
+    <port name="HelloPort" binding="tns:HelloPortBinding">
+      <soap:address
+        location="http://soabookdev.scarsdale.javector.com:8080/nodescriptor-wsdl-endpoint/HelloService"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
+    </port>
+  </service>
+  <!--! </example> -->
+</definitions>

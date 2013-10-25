@@ -1,0 +1,9 @@
+<projectDescription>
+  <name>provider-testartifact-generatedwsdl-ear</name>
+  <comment/>
+  <projects>
+    <project>provider-testartifact-generatedwsdl</project>
+  </projects>
+  <buildSpec/>
+  <natures/>
+</projectDescription>

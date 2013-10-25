@@ -1,0 +1,62 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  <goal name="run" prereqs="clean">
+    <attainGoal name="multiproject:clean"/>
+    <attainGoal name="multiproject:install"/>
+    <attainGoal name="run-deserializer1"/>
+    <attainGoal name="run-deserializer2"/>
+  </goal>
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-glassfish-to-classpath"/>
+    <attainGoal name="gen-schema"/>
+    <path id="gen.classes">
+      <fileset dir="${basedir}/modules">
+        <include name="**/*.jar"/>
+      </fileset>
+    </path>
+    <maven:addPath id="maven.dependency.classpath" refid="gen.classes"/>
+  </preGoal>
+  <goal name="run-deserializer1" prereqs="jar">
+    <java classname="samples.deser.AddressDeserializer1">
+      <classpath>
+        <path refid="maven.dependency.classpath"/>
+        <pathelement location="${basedir}/target/classes"/>
+        <fileset dir="${basedir}/modules/schema2java/target">
+          <include name="*.jar"/>
+        </fileset>
+        <!-- need this to get the JAXP 1.3 DatatypeFactory -->
+        <fileset dir="${java.home}/lib">
+          <include name="rt.jar"/>
+        </fileset>
+      </classpath>
+      <arg value="${basedir}/src/xml/corp_address.xml"/>
+    </java>
+  </goal>
+  <goal name="run-deserializer2" prereqs="jar">
+    <java classname="samples.deser.AddressDeserializer2">
+      <classpath>
+        <path refid="maven.dependency.classpath"/>
+        <pathelement location="${basedir}/target/classes"/>
+        <!-- need this to get the JAXP 1.3 DatatypeFactory -->
+        <fileset dir="${java.home}/lib">
+          <include name="rt.jar"/>
+        </fileset>
+      </classpath>
+      <arg value="${basedir}/src/xml/corp_address.xml"/>
+      <arg value="${basedir}/src/xml/corp_address_to_address.xslt"/>
+    </java>
+  </goal>
+  <goal name="gen-schema" prereqs="book:setenv">
+    <mkdir dir="${basedir}/target/work/schema"/>
+    <mkdir dir="${basedir}/target/classes"/>
+    <exec executable="${glassfish.appsrvr}/bin/${schemagen}">
+      <arg value="-d"/>
+      <arg value="${basedir}/target/classes"/>
+      <arg value="${basedir}/etc/java/samples/Address.java"/>
+      <arg value="${basedir}/etc/java/samples/Phone.java"/>
+      <arg value="${basedir}/etc/java/samples/State.java"/>
+    </exec>
+    <move file="${basedir}/target/classes/schema1.xsd"
+      tofile="${basedir}/target/work/schema/address.xsd"/>
+  </goal>
+
+</project>

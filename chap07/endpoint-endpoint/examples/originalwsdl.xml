@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="GENERATED_WSDL"> -->
+<!--! <c>chap07</c><s>endpoint</s> -->
+<definitions xmlns:tns="http://www.example.com/req"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  targetNamespace="http://www.example.com/req" name="RequestOrderService">
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://www.example.com/req"
+        schemaLocation="http://localhost:8680/oms/requestOrder?xsd=1"/>
+    </xsd:schema>
+    <xsd:schema>
+      <xsd:import namespace="http://www.example.com/oms"
+        schemaLocation="http://localhost:8680/oms/requestOrder?xsd=2"/>
+    </xsd:schema>
+    <xsd:schema>
+      <xsd:import namespace="http://www.example.com/faults"
+        schemaLocation="http://localhost:8680/oms/requestOrder?xsd=3"/>
+    </xsd:schema>
+  </types>
+  <message name="requestOrder">
+    <part element="tns:requestOrder" name="parameters"/>
+  </message>
+  <message name="requestOrderResponse">
+    <part element="tns:requestOrderResponse" name="parameters"/>
+  </message>
+  <message name="inputMessageValidationFault">
+    <part xmlns:ns1="http://www.example.com/faults"
+      element="ns1:inputMessageValidationFault"
+      name="inputMessageValidationFault"/>
+  </message>
+  <portType name="RequestOrderPort">
+    <operation name="requestOrder">
+      <input message="tns:requestOrder"/>
+      <output message="tns:requestOrderResponse"/>
+      <fault message="tns:inputMessageValidationFault"
+        name="inputMessageValidationFault"/>
+    </operation>
+  </portType>
+  <binding type="tns:RequestOrderPort" name="RequestOrderPortBinding">
+    <soap:binding style="document"
+      transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="requestOrder">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="inputMessageValidationFault">
+        <soap:fault use="literal" name="inputMessageValidationFault"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="RequestOrderService">
+    <port binding="tns:RequestOrderPortBinding" name="RequestOrderPort">
+      <soap:address location="http://localhost:8680/oms/requestOrder"/>
+    </port>
+  </service>
+</definitions>
+<!--! </example> -->

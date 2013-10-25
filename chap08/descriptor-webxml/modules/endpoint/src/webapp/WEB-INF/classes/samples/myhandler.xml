@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="WEB_XML_HANDLER_FILE"> -->
+<!--! <c>chap08</c><s>descriptor</s> -->
+<handler-chains xmlns:jws="http://java.sun.com/xml/ns/javaee">
+  <handler-chain>
+    <handler>
+      <handler-class>samples.HelloHandler</handler-class>
+    </handler>
+  </handler-chain>
+</handler-chains>
+<!--! </example> -->

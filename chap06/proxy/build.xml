@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soashopper-ear" basedir=".">
+  
+  <import file="${basedir}/../../common-build.xml"/>
+
+  <target name="run-container">
+    <exec executable="${appclient}">
+      <arg value="-client"/>
+      <arg value="${basedir}/modules/client/target/chap06-proxy-client-1.0.jar"/>
+      <arg value="-mainclass"/>
+      <arg value="samples.Client"/>
+      <arg value="${glassfish.host}"/>
+      <arg value="${glassfish.deploy.port}"/>
+    </exec>
+  </target>
+
+  <target name="run-standalone">
+    <java classname="samples.Client" fork="true">
+      <classpath>
+        <pathelement location="${basedir}/modules/client/target/chap06-proxy-client-1.0.jar"/>
+        <path refid="glassfish.webservices.path"/>
+      </classpath>
+      <arg value="${glassfish.host}"/>
+      <arg value="${glassfish.deploy.port}"/>
+    </java>
+  </target>
+
+</project>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DO NOT REMOVE OR RE-ARRANGE COMMENTS.  THEY PROVIDE GUIDANCE TO THE WSDL 
+GENERATION CODERS.  EACH COMMENT REFERS TO THE FOLLOWING WSDL ELEMENT. -->
+<definitions xmlns:tns="http://javector.com/soaj/test/wsdlgen/voidReturnType"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:po="http://javector.com/ser/adaptive/po"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  targetNamespace="http://javector.com/soaj/test/wsdlgen/voidReturnType"
+  name="VoidReturnTypeConfig">
+  <types>
+    <xs:schema targetNamespace="http://javector.com/ser/adaptive/po">
+      <xs:include schemaLocation="purchaseOrder.xsd"/>
+    </xs:schema>
+    <xs:schema xmlns="http://www.w3.org/2001/XMLSchema"
+      targetNamespace="http://javector.com/soaj/test/wsdlgen/voidReturnType"
+      elementFormDefault="qualified">
+      <!--
+        you must import all the namespaces from the
+        soajWSDL/userDefinedSchemas/userDefinedSchema elements
+      -->
+      <xs:import namespace="http://javector.com/ser/adaptive/po"/>
+      <!--
+        define the request wrapper element for each soajOperation
+        name = soajOperation[@operationName]
+      -->
+      <element name="updateAddress">
+        <complexType>
+          <!--
+            the xml parameters for the request.  each element corresponds to a
+            soajOperation/parameterMapping.  each element has either
+            (1) ref *only* ... OR
+            (2) name *and* type
+            where the form (i.e., (1) vs. (2)) depends on the form of the
+            parameterMapping/xmlElement.  if the form is 
+            parameterMapping/xmlElement/eltRef, then use (1).  but,if the form
+            is parameterMapping/xmlElement/eltName, then use (2).
+            
+            ref = parameterMapping/eltRef
+            name = parameterMapping/eltName ** MUST BE NCName - use local part **
+            type = parameterMapping/eltType
+          -->
+          <sequence>
+            <element name="poNum" type="xs:string"/>
+            <element name="addr" type="po:BillToType"/>
+          </sequence>
+        </complexType>
+      </element>
+      <!--
+        define the response wrapper element for each soajOperation
+        name = /soajWSDL/soajService/soajPort/soajOperation[@operationName] +
+        "Response"
+      -->
+      <element name="updateAddressResponse">
+        <complexType>
+          <!--
+            the xml parameter for the response.  the element corresponds to the
+            soajOperation/returnMapping.
+            
+            note: the current version of soaj only supports a single return
+            parameter.  in the next release, soaj should support multple return
+            parameters implemented by in/out and out style java parameters.
+          -->
+          <sequence/>
+        </complexType>
+      </element>
+    </xs:schema>
+  </types>
+  <!--
+    the request messages for each soajOperation
+    name = "request_" + soajOperation[@operationName]
+  -->
+  <message name="request_updateAddress">
+    <!--
+      a single part, corresponding to the request wrapper element
+      name = "parameters *always*
+      element = "tns:" +  soajOperation[@operationName]
+    -->
+    <part name="parameters" element="tns:updateAddress"/>
+  </message>
+  <!--
+    the reqponse messages for each soajOperation
+    name = "response_" + soajOperation[@operationName]
+  -->
+  <message name="response_updateAddress">
+    <!--
+x      a single part, corresponding to the response wrapper element
+      name = "parameters *always*
+      element = "tns:" +  soajOperation[@operationName] + "Response"
+    -->
+    <part name="parameters" element="tns:updateAddressResponse"/>
+  </message>
+  <!--
+    one portType for each soajPort
+    name = soajPort[@portName] + "Type"
+  -->
+  <portType name="UpdateAddressPortType">
+    <!--
+      one operation for each soajPort/soajOperation
+      name = soajOperation[@operationName]
+    -->
+    <operation name="updateAddress">
+      <input message="tns:request_updateAddress"/>
+      <output message="tns:response_updateAddress"/>
+    </operation>
+  </portType>
+  <!--
+    one binding for each soajPort
+    name = soajPort[@portName] + "Binding"
+    type = "tns:" + soajPort[@portName]
+  -->
+  <binding name="UpdateAddressPortBinding" type="tns:UpdateAddressPortType">
+    <soap:binding style="document"
+      transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="updateAddress">
+      <soap:operation/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <!--
+    one service for each soajService
+    name = soajService[@serviceName]
+  -->
+  <service name="UpdateAddressService">
+    <!--
+      one port for each soajPort
+      name = soajPort[@portName]
+      binding = "tns:" + soajPOrt[@portName] + "Binding"
+    -->
+    <port name="UpdateAddressPort" binding="tns:UpdateAddressPortBinding">
+      <soap:address
+        location="http://localhost:8080/soaj/wsdlgenTest/voidReturnType"/>
+      <!--
+        location = soajPort[@endpoint]
+      -->
+    </port>
+  </service>
+</definitions>

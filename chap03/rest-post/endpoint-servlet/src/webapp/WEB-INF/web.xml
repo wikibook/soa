@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app 
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" 
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+
+<!--! <example xn="Deploying_UpdateCustomerHistoryServlet_web_xml"> -->
+<!--! <c>chap03</c><s>rest-post</s> -->
+  <web-app>
+  <servlet>
+    <servlet-name>UpdateCustomerHistoryServlet</servlet-name>
+    <servlet-class>
+      samples.UpdateCustomerHistoryServlet
+    </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateCustomerHistoryServlet</servlet-name>
+    <url-pattern>/CustomerHistory</url-pattern>
+  </servlet-mapping>
+</web-app>
+<!--! </example> -->
+    

@@ -1,0 +1,34 @@
+mvn deploy:deploy-file  -DgroupId=glassfish  -DartifactId=javaee  -Dversion=1.0 -Dfile=D:\glassfish\lib\javaee.jar  -Dpackaging=jar  -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=jaxb  -DartifactId=jaxb-api  -Dversion=2.0 -Dfile=jaxb-api.jar  -Dpackaging=jar  -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=jaxb  -DartifactId=jaxb-impl  -Dversion=2.0 -Dfile=jaxb-impl.jar  -Dpackaging=jar  -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=jaxb  -DartifactId=jaxb-xjc  -Dversion=2.0 -Dfile=jaxb-xjc.jar  -Dpackaging=jar  -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=jaxb  -DartifactId=jsr173_1.0_api  -Dversion=2.0 -Dfile=jsr173_1.0_api.jar  -Dpackaging=jar  -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=jaxb  -DartifactId=jaxb1-impl  -Dversion=2.0 -Dfile=jaxb1-impl.jar  -Dpackaging=jar  -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=jaxb  -DartifactId=jaxb2-reflection  -Dversion=2.0 -Dfile=jaxb2-reflection.jar  -Dpackaging=jar  -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=jaxb  -DartifactId=activation -Dversion=2.0 -Dfile=activation.jar -Dpackaging=jar  -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=glassfish  -DartifactId=javaee -Dversion=b.42 -Dfile=javaee.jar -Dpackaging=jar  -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file -DgroupId=soaj -DartifactId=admin-plugin -Dversion=1.0 -Dfile=/home/devglassfish/.m2/repository/soaj/admin-plugin/1.0/admin-plugin-1.0.jar -Dpackaging=maven-plugin -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=soaj.eclipse.wst  -DartifactId=org.apache.xerces_2.7.0.v200602052214.resolver -Dversion=1.0.3 -Dfile=/home/devglassfish/eclipse_download/org.apache.xerces_2.7.0.v200602052214.resolver.jar -Dpackaging=jar -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=soaj.eclipse.wst  -DartifactId=org.apache.xerces_2.7.0.v200602052214.xercesImpl -Dversion=1.0.3 -Dfile=/home/devglassfish/eclipse_download/org.apache.xerces_2.7.0.v200602052214.xercesImpl.jar -Dpackaging=jar -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=soaj.eclipse.wst  -DartifactId=org.apache.xerces_2.7.0.v200602052214.xml-apis -Dversion=1.0.3 -Dfile=/home/devglassfish/eclipse_download/org.apache.xerces_2.7.0.v200602052214.xml-apis.jar -Dpackaging=jar -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=soaj.eclipse.wst  -DartifactId=org.eclipse.wst.wsdl.validation_1.0.1.v200603152158 -Dversion=1.0.3 -Dfile=/home/devglassfish/eclipse_download/org.eclipse.wst.wsdl.validation_1.0.1.v200603152158.jar -Dpackaging=jar -DrepositoryId=soabook -Durl=ftp://soabook.com/maven-repo
+
+mvn deploy:deploy-file  -DgroupId=soaj.eclipse.wst  -DartifactId=org.wsdl4j_1.4.0.v200602131706.wsdl4j -Dversion=1.0.3 -Dfile=/home/devglassfish/eclipse_download/org.wsdl4j_1.4.0.v200602131706.wsdl4j.jar -Dpackaging=jar -DrepositoryId=soaj -Durl=ftp://soaj.javector.com
+
+mvn deploy:deploy-file  -DgroupId=soaj.jaxb2-reflection  -DartifactId=jaxb2-reflection -Dversion=20060912 -Dfile=/home/devglassfish/tmp/jaxb2-reflection/jaxb2-reflection.jar -Dpackaging=jar -DrepositoryId=soaj -Durl=ftp://soaj.javector.com
+
+
+

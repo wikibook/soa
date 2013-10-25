@@ -1,0 +1,20 @@
+<projectDescription>
+  <name>provider-javaeetesting-runtests</name>
+  <comment/>
+  <projects>
+    <project>provider-testartifact-generatedwsdl-ear</project>
+    <project>provider-testartifact-staticwsdl-ear</project>
+    <project>core</project>
+    <project>posystem-testartifact-ear</project>
+    <project>provider-serversidetestclients-ejbmethodtester</project>
+  </projects>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+      <arguments/>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>

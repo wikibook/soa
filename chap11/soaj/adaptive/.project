@@ -1,0 +1,17 @@
+<projectDescription>
+  <name>adaptive</name>
+  <comment/>
+  <projects>
+    <project>adaptive-config</project>
+    <project>core</project>
+  </projects>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+      <arguments/>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>

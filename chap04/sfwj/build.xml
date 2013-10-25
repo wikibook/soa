@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soashopper-ear" basedir=".">
+  
+  <import file="${basedir}/../../common-build.xml"/>
+
+  <target name="build">
+    <exec executable="${mvn}">
+      <arg value="clean"/>
+      <arg value="install"/>
+    </exec>
+  </target>
+
+  <target name="run-deserializer1" depends="build">
+    <java classname="samples.deser.AddressDeserializer1" fork="true">
+      <classpath>
+        <path refid="glassfish.webservices.path"/>
+        <fileset dir="${basedir}/target">
+          <include name="*.jar"/>
+        </fileset>
+      </classpath>
+      <arg value="${basedir}/src/xml/corp_address.xml"/>
+    </java>
+  </target>
+
+  <target name="run-deserializer2">
+    <java classname="samples.deser.AddressDeserializer2" fork="true">
+      <classpath>
+        <path refid="glassfish.webservices.path"/>
+        <fileset dir="${basedir}/target">
+          <include name="*.jar"/>
+        </fileset>
+      </classpath>
+      <arg value="${basedir}/src/xml/corp_address.xml"/>
+      <arg value="${basedir}/src/xml/corp_address_to_address.xslt"/>
+    </java>
+  </target>
+
+  <target name="run-both-deserializers" depends="build">
+    <java classname="samples.deser.AddressDeserializer1" fork="true">
+      <classpath>
+        <path refid="glassfish.webservices.path"/>
+        <fileset dir="${basedir}/target">
+          <include name="*.jar"/>
+        </fileset>
+      </classpath>
+      <arg value="${basedir}/src/xml/corp_address.xml"/>
+    </java>
+    <java classname="samples.deser.AddressDeserializer2" fork="true">
+      <classpath>
+        <path refid="glassfish.webservices.path"/>
+        <fileset dir="${basedir}/target">
+          <include name="*.jar"/>
+        </fileset>
+      </classpath>
+      <arg value="${basedir}/src/xml/corp_address.xml"/>
+      <arg value="${basedir}/src/xml/corp_address_to_address.xslt"/>
+    </java>
+  </target>
+
+
+
+  <target name="copy-sources">
+    <mkdir dir="${basedir}/target/work/java"/>
+    <!-- schema compiled classes -->
+    <copy todir="${basedir}/target/work/java">
+      <fileset dir="${basedir}/modules/schema2java/target/work/java">
+        <include name="**/*.java"/>
+      </fileset>
+    </copy>
+    <!-- start from java classes -->
+    <copy todir="${basedir}/target/work/java">
+      <fileset dir="${basedir}/etc/java">
+        <include name="**/*.java"/>
+      </fileset>
+    </copy>
+    <!-- deserializer classes -->
+    <copy todir="${basedir}/target/work/java">
+      <fileset dir="${basedir}/src/java">
+        <include name="**/*.java"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="gen-schema">
+    <mkdir dir="${basedir}/target/work/schema"/>
+    <mkdir dir="${basedir}/target/classes"/>
+    <exec executable="${schemagen}">
+      <arg value="-d"/>
+      <arg value="${basedir}/target/classes"/>
+      <arg value="${basedir}/etc/java/samples/Address.java"/>
+      <arg value="${basedir}/etc/java/samples/Phone.java"/>
+      <arg value="${basedir}/etc/java/samples/State.java"/>
+    </exec>
+    <move file="${basedir}/target/classes/schema1.xsd"
+      tofile="${basedir}/target/work/schema/address.xsd"/>
+  </target>
+  
+</project>

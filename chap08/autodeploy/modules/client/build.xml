@@ -1,0 +1,44 @@
+<project>
+
+  <import file="${basedir}/../../../../common-build.xml" />
+ 
+  <target name="setenv">
+    <property name="autodeploy.dir"
+      value="${glassfish.appsvr}/domains/${glassfish.domain}/autodeploy"/>
+    <property name="war"
+      value="${basedir}/../endpoint/target/${module}.war"/>
+  </target>
+
+  <!--! <example xn="DEPLOY_SCRIPT"> -->
+  <!--! <c>chap08</c><s>autodeploy</s> -->
+  <target name="auto_deploy" depends="setenv">
+    <echo message="deploying: ${war}"/>
+    <copy file="${war}" todir="${autodeploy.dir}"/>
+    <waitfor maxwait="100" maxwaitunit="second" checkevery="100">
+      <or>
+        <available file="${autodeploy.dir}/${module}.war_deployed"/>
+        <available file="${autodeploy.dir}/${module}.war_deployFailed"/>
+      </or>
+    </waitfor>
+  </target>
+  <!--! </example> -->
+  
+  <target name="auto_undeploy" depends="setenv">
+    <echo message="deleting file ${autodeploy.dir}/${module}.war"/>
+    <delete file="${autodeploy.dir}/${module}.war"/>
+    <waitfor maxwait="20" maxwaitunit="second">
+      <or>
+        <available file="${autodeploy.dir}/${module}.war_undeployed"/>
+        <available file="${autodeploy.dir}/${module}.war_undeployFailed"/>
+      </or>
+    </waitfor>
+    <condition property="status" value="SUCCEEDED">
+      <available file="${autodeploy.dir}/${module}.war_undeployed"/>
+    </condition>
+    <condition property="status" value="FAILED">
+      <available file="${autodeploy.dir}/${module}.war_undeployedFailed"/>
+    </condition>
+    <echo message="Undeploy of ${module}.war ${status}."/>
+  </target>
+
+</project>

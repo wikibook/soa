@@ -1,0 +1,20 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  
+  <goal name="build" prereqs="clean, war"/>
+
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-glassfish-to-classpath"/>
+  </preGoal>
+  
+  <goal name="deploy" prereqs="book:setenv">
+    <echo message="deploying: ${maven.build.dir}/${pom.artifactId}.war"/>
+    <copy file="${maven.build.dir}/${pom.artifactId}.war"
+      todir="${autodeploy.dir}"/>
+  </goal>
+  
+  <goal name="undeploy" prereqs="book:setenv">
+    <delete
+      file="${autodeploy.dir}/${pom.artifactId}.war"/>
+  </goal>
+  
+ </project>

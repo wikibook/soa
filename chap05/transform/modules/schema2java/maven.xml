@@ -1,0 +1,23 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  
+  <goal name="build" prereqs="clean, jar:install"/>
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-glassfish-to-classpath"/>
+    <attainGoal name="gen-java"/>
+  </preGoal>
+  <goal name="gen-java" prereqs="book:setenv">
+    <delete dir="${basedir}/src/java"/>
+    <mkdir dir="${basedir}/src/java"/>
+    <exec executable="${glassfish.appsrvr}/bin/${xjc}">
+      <arg value="-d"/>
+      <arg value="${basedir}/src/java"/>
+      <arg value="http://soabook.com/example/oms/orders.xsd"/>
+    </exec>
+    <exec executable="${glassfish.appsrvr}/bin/${xjc}">
+      <arg value="-d"/>
+      <arg value="${basedir}/src/java"/>
+      <arg value="http://soabook.com/example/css/custhistentries.xsd"/>
+    </exec>
+  </goal>
+
+</project>

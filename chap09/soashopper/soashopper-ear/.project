@@ -1,0 +1,11 @@
+<projectDescription>
+  <name>soashopper-ear</name>
+  <comment/>
+  <projects>
+    <project>soashopper-services-soap</project>
+    <project>soashopper-ajax</project>
+    <project>soashopper-services-rest</project>
+  </projects>
+  <buildSpec/>
+  <natures/>
+</projectDescription>

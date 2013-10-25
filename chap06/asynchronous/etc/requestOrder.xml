@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<requestOrder xmlns="http://www.example.com/req" xmlns:ns2="http://www.example.com/oms">
+    <CUST_NO>ENT0072123</CUST_NO>
+    <ccard>
+        <ns2:CC_TYPE>VISA</ns2:CC_TYPE>
+        <ns2:CC_NUMBER>01234567890123456789</ns2:CC_NUMBER>
+        <ns2:CC_EXPIRE_DATE>2009-10-31</ns2:CC_EXPIRE_DATE>
+        <ns2:CC_NAME>John Doe</ns2:CC_NAME>
+    </ccard>
+    <item>
+        <ns2:ITM_NUMBER>012345</ns2:ITM_NUMBER>
+        <ns2:STORAGE_LOC>NE02</ns2:STORAGE_LOC>
+        <ns2:TARGET_QTY>50</ns2:TARGET_QTY>
+        <ns2:TARGET_UOM>CNT</ns2:TARGET_UOM>
+        <ns2:PRICE_PER_UOM>7.95</ns2:PRICE_PER_UOM>
+        <ns2:SHORT_TEXT>7 mm Teflon Gasket</ns2:SHORT_TEXT>
+    </item>
+    <item>
+        <ns2:ITM_NUMBER>543210</ns2:ITM_NUMBER>
+        <ns2:TARGET_QTY>5</ns2:TARGET_QTY>
+        <ns2:TARGET_UOM>KG</ns2:TARGET_UOM>
+        <ns2:PRICE_PER_UOM>12.58</ns2:PRICE_PER_UOM>
+        <ns2:SHORT_TEXT>Lithium grease with PTFE/Teflon</ns2:SHORT_TEXT>
+    </item>
+</requestOrder>

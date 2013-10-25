@@ -1,0 +1,43 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  
+  <goal name="build" prereqs="clean, jar"/>
+  
+  <!-- RUN: invoke the Servlet Version RESTful service to post a cust history -->
+  <target name="run-servlet">
+    <mkdir dir="${user.home}/tmp"/>
+    <delete>
+     <fileset dir="${user.home}/tmp" includes="soabook*.xml"/>
+    </delete>
+    <java classname="samples.PostCustomerHistory"
+      failonerror="true">
+      <arg value="${basedir}/etc/custhistentry.xml"/>
+        <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/rest-post-servlet/CustomerHistory?SourceSystem=OMS"/>
+      <classpath>
+        <fileset dir="${maven.build.dir}">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+  </target>
+  
+  <!-- RUN: invoke the JAX-WS Version RESTful service to post a cust history -->
+  <target name="run-jaxws">
+    <mkdir dir="${user.home}/tmp"/>
+    <delete>
+      <fileset dir="${user.home}/tmp" includes="soabook*.xml"/>
+    </delete>
+    <java classname="samples.PostCustomerHistory"
+      failonerror="true">
+      <arg value="${basedir}/etc/custhistentry.xml"/>
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/rest-post-jaxws/CustomerHistory"/>
+      <classpath>
+        <fileset dir="${maven.build.dir}">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+  </target>
+
+</project>

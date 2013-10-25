@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:j2ee="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+    <!-- Define the filters within the Web Application -->
+
+      <filter>
+        <filter-name>Request Filter</filter-name>
+        <filter-class>com.javector.soaj.filter.RequestFilter</filter-class>
+          <init-param>
+                <param-name>queryString</param-name>
+                <param-value>wsdl</param-value>
+              </init-param>
+      </filter>
+
+
+      <!-- Map the filter to a Servlet or URL -->
+
+      <filter-mapping>
+        <filter-name>Request Filter</filter-name>
+        <url-pattern>/soaj/*</url-pattern>
+      </filter-mapping>
+
+
+  <servlet>
+    <servlet-name>com.javector.soaj.provider.SoajProvider</servlet-name>
+    <servlet-class>com.javector.soaj.provider.SoajProvider</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.javector.soaj.provider.SoajProvider</servlet-name>
+    <url-pattern>/soaj-provider</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
+
+
+    <servlet>
+        <description>JAX-WS endpoint - wsdl</description>
+        <display-name>wsdl</display-name>
+        <servlet-name>com.javector.soaj.servlet.WsdlRequestServlet</servlet-name>
+        <servlet-class>com.javector.soaj.servlet.WsdlRequestServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>com.javector.soaj.servlet.WsdlRequestServlet</servlet-name>
+        <url-pattern>/soaj/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>

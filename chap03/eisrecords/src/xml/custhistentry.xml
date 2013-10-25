@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="CustomerHistory"> -->
+<!--! <c>chap03</c><s>eisrecords</s> -->
+<css:CustomerHistoryEntry xmlns:css="http://www.example.com/css"
+  xmlns="http://www.example.com/css"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.example.com/css
+  http://soabook.com/example/css/custhistentries.xsd">
+  <CustomerNumber>ENT0072123</CustomerNumber>
+  <OrderLookupInfo>
+    <OrderNumber>ENT1234567</OrderNumber>
+    <PURCH_ORD_NO>PO-72123-0007</PURCH_ORD_NO>
+    <ITM_NUMBER>012345</ITM_NUMBER>
+    <ITM_NUMBER>543210</ITM_NUMBER>
+    <OrderText>This order is a rush.</OrderText>
+  </OrderLookupInfo>
+</css:CustomerHistoryEntry>
+<!--! </example> -->

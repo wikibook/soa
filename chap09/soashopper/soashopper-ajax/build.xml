@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soashopper-ajax" basedir=".">
+  
+  <import file="${basedir}/../../../common-build.xml"/>
+
+  <target name="deploy">
+    <ant target="deploy-glassfish">
+      <property name="artifact" 
+        value="${basedir}/target/soashopper-ajax-1.0.war"/>
+    </ant>
+  </target>
+  
+  <target name="undeploy">
+    <ant target="undeploy-glassfish">
+      <property name="module" value="soashopper-ajax-1.0"/>
+    </ant>
+  </target>
+	
+	<target name="redeploy" depends="undeploy, deploy"/>
+	
+	<target name="rebuild-redeploy">
+	  <exec executable="${mvn}">
+			<arg value="install"/>
+		</exec>
+		<antcall target="redeploy"/>
+	</target>
+  
+</project>

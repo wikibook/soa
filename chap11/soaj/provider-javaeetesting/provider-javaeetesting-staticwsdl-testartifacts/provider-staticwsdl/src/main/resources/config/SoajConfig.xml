@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soajConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://javector.com/soaj/config ../../../../../../../provider/src/main/resources/config/soaj-config.xsd"
+  xmlns:po="http://javector.com/ser/adaptive/po"
+  xmlns="http://javector.com/soaj/config">
+  <soajWSDL wsdlName="SoajProvider"
+    wsdlNamespace="http://javector.com/soaj/provider">
+    <soajService serviceName="SoajProviderService">
+      <soajPort portName="SoajProviderPort"
+        endpoint="http://localhost:8080/provider-staticwsdl/test">
+        <soajOperation operationName="getBillTo">
+          <soajPOJOMethod javaMethod="getBillTo"
+            javaClass="com.javector.soaj.test.ProviderTest">
+            <paramClass>com.javector.ser.adaptive.po.MyPurchaseOrder</paramClass>
+          </soajPOJOMethod>
+          <parameterMapping>
+            <javaClass>com.javector.ser.adaptive.po.MyPurchaseOrder</javaClass>
+            <xmlElement>
+              <eltRef>po:PurchaseOrder</eltRef>
+            </xmlElement>
+          </parameterMapping>
+          <returnMapping>
+            <javaClass>com.javector.ser.adaptive.po.Address</javaClass>
+            <xmlElement>
+              <eltName>billTo</eltName>
+              <eltType>po:billToType</eltType>
+            </xmlElement>
+          </returnMapping>
+        </soajOperation>
+      </soajPort>
+    </soajService>
+  </soajWSDL>
+  <mappingXml>config/SoajProviderMapping.xml</mappingXml>
+  <userDefinedSchemas>
+    <userDefinedSchema>
+      <targetNamespace>http://javector.com/ser/adaptive/po</targetNamespace>
+      <schemaLocation>http://localhost:8080/provider-staticwsdl/config/SoajProviderSchema.xsd</schemaLocation>
+    </userDefinedSchema>
+  </userDefinedSchemas>
+</soajConfiguration>

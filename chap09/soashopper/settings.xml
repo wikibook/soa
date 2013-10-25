@@ -1,0 +1,12 @@
+<settings>
+  <servers>
+    <server>
+      <id>soaj</id>
+      <username>maven@javector.com</username>
+      <password>djs84tqp</password>
+    </server>
+  </servers>
+  <pluginGroups>
+    <pluginGroup>soaj</pluginGroup>
+  </pluginGroups>
+</settings>

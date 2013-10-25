@@ -1,0 +1,57 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  
+  <goal name="build" prereqs="clean, jar"/>
+  
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-glassfish-to-classpath"/>
+  </preGoal>
+  
+  <target name="test">
+    <mkdir dir="${user.home}/tmp"/>
+    <delete file="${user.home}/tmp/output.xml"/>
+    <attainGoal name="book:setenv"/>
+    <java classname="samples.TestXform" failonerror="true">
+      <arg value="${basedir}/etc/orders.xml"/>
+      <arg value="${user.home}/tmp/output.xml"/>
+      <!--
+        <arg value="${basedir}/etc/test.xslt"/>
+      -->
+      <arg value="${basedir}/etc/order_to_history.xslt"/>
+      <classpath>
+        <path refid="glassfish.classpath"/>
+        <path refid="maven.dependency.classpath"/>
+        <fileset dir="${maven.build.dir}">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+    <loadfile property="output"
+      srcFile="${user.home}/tmp/output.xml"/>
+    <echo message="${output}"/>
+  </target>
+  
+  <!-- RUN: get the new orders and write the customer histories -->
+  <target name="run">
+    <mkdir dir="${user.home}/tmp"/>
+    <delete quiet="true">
+     <fileset dir="${user.home}/tmp" includes="soabook*.xml"/>
+    </delete>
+    <attainGoal name="book:setenv"/>
+    <java classname="samples.OrderToCustHist"
+      failonerror="true">
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/rest-get-servlet/NewOrders"/>
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/rest-post-servlet/CustomerHistory?SourceSystem=OMS"/>
+      <arg value="${basedir}/etc/order_to_history.xslt"/>
+      <classpath>
+        <path refid="glassfish.classpath"/>
+        <path refid="maven.dependency.classpath"/>
+        <fileset dir="${maven.build.dir}">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+  </target>
+
+</project>

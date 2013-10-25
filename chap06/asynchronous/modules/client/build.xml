@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="chap06-asynchronous-client" basedir=".">
+  
+  <import file="${basedir}/../../../../common-build.xml"/>
+
+  <target name="sei-import">
+    <copy todir="${basedir}/target/classes">
+      <fileset dir="${basedir}/../wsdl2java/target/classes"/>
+    </copy>
+  </target>
+  
+</project>

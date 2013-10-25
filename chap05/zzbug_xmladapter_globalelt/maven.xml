@@ -1,0 +1,26 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  
+  <preGoal name="java:prepare-filesystem">
+    <attainGoal name="clean"/>
+  </preGoal>
+  
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-jaxb2-to-classpath"/>
+  </preGoal>
+  
+  <target name="run">
+    <attainGoal name="jar"/>
+    <attainGoal name="book:setenv"/>
+    <java classname="samples.MyFooSerializer"
+      failonerror="true" fork="true">
+      <classpath>
+        <path refid="jaxb2.classpath"/>
+        <fileset dir="${basedir}/target">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+      <arg value="${basedir}/etc/orderElement.xsd"/>
+    </java>
+  </target>
+
+</project>

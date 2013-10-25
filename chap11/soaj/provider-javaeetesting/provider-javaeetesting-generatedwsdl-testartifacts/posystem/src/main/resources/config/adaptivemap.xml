@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adaptiveMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://javector.com/ser/adaptive ../../../../../../../adaptive/src/main/resources/config/SOAAdaptiveMapping.xsd"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:po="http://javector.com/ser/adaptive/po"
+  xmlns="http://javector.com/ser/adaptive">
+  <strategy javaClass="com.javector.soaj.wsdlgentest.po.Item" xmlType="po:item"
+    xmlName="po:item">
+    <rule javaName="name" xmlName="po:productName" xmlType="xs:string"
+      xmlNodeType="ATTRIBUTE"/>
+    <rule javaName="amount" xmlName="po:quantity" xmlType="xs:positiveInteger"
+      xmlNodeType="ELEMENT"> </rule>
+    <rule javaName="price" xmlName="po:price" xmlType="xs:double"
+      xmlNodeType="ELEMENT"> </rule>
+  </strategy>
+
+  <strategy javaClass="java.lang.String" xmlType="xs:string" xmlName="po:item">
+    <rule javaName="." xmlName="." xmlType="xs:string">
+      <property name="deserializerHandlerClass"
+        value="com.javector.ser.adaptive.jaxb.impl.PoSystemAdaptiveDeserializer"
+      />
+    </rule>
+  </strategy>
+  <!--! <example xn="getBillTo_mapping_billTo"> -->
+  <!--! <c>chap11</c><s>serializer</s> -->
+  <strategy javaClass="com.javector.soaj.wsdlgentest.po.Address"
+    xmlType="po:billToType" xmlName="po:billTo">
+    <rule javaName="." xmlName="po:street" xmlType="xs:string"
+      xmlNodeType="ELEMENT" restrictTo="SERIALIZATION">
+      <script><![CDATA[
+        return source.getStreetNum()+" "+source.getStreetName();
+        ]]></script>
+    </rule>
+    <rule javaName="streetNum" javaClass="int" xmlName="po:street"
+      xmlType="xs:string" xmlNodeType="ELEMENT" restrictTo="DESERIALIZATION">
+      <script><![CDATA[substring-before(.,' ')]]></script>
+    </rule>
+    <rule javaName="streetName" javaClass="java.lang.String" xmlName="po:street"
+      xmlType="xs:string" xmlNodeType="ELEMENT" restrictTo="DESERIALIZATION">
+      <script><![CDATA[substring-after(.,' ')]]></script>
+    </rule>
+    <rule javaName="city" xmlName="po:city" xmlType="xs:string"
+      xmlNodeType="ELEMENT"/>
+    <rule javaName="state" xmlName="po:state" xmlType="xs:string"
+      xmlNodeType="ELEMENT"/>
+    <rule javaName="zip" xmlName="po:zip" xmlType="xs:string"
+      xmlNodeType="ELEMENT"/>
+    <rule javaName="phoneNumber"
+      javaClass="com.javector.soaj.wsdlgentest.po.Phone" xmlName="po:phone"
+      xmlType="xs:string" xmlNodeType="ELEMENT" restrictTo="DESERIALIZATION"/> 
+    <rule javaName="phoneNumber" xmlName="po:phone" xmlType="xs:string"
+      xmlNodeType="ELEMENT" restrictTo="SERIALIZATION">
+      <script><![CDATA[
+        String area = Integer.toString(source.getAreaCode());
+        return "("+area+")"+" "+source.getExchange()+"-"+source.getNumber();
+      ]]></script>
+    </rule>
+  </strategy>
+  <!--! </example> -->
+  <strategy javaClass="com.javector.soaj.wsdlgentest.po.Phone"
+    xmlType="xs:string">
+    <rule javaName="areaCode" xmlType="xs:string" xmlNodeType="ELEMENT"
+      restrictTo="DESERIALIZATION">
+      <!--no need for namespace since complex xpath evaluation will be handled by wrap-->
+      <script><![CDATA[substring-before(substring-after(.,'('),')')]]></script>
+    </rule>
+    <rule javaName="exchange" xmlType="xs:string" xmlNodeType="ELEMENT"
+      restrictTo="DESERIALIZATION">
+      <script><![CDATA[substring-before(substring-after(.,' '),'-')]]></script>
+    </rule>
+    <rule javaName="number" xmlType="xs:string" xmlNodeType="ELEMENT"
+      restrictTo="DESERIALIZATION">
+      <script><![CDATA[substring-after(.,'-')]]></script>
+    </rule>
+  </strategy>
+  <!--! <example xn="getBillTo_mapping_po"> -->
+  <!--! <c>chap11</c><s>serializer</s> -->
+  <strategy javaClass="com.javector.soaj.wsdlgentest.po.PurchaseOrder"
+    xmlType="po:purchaseOrder">
+    <rule javaName="ponum" xmlName="ponum" xmlType="xs:string"
+      xmlNodeType="ATTRIBUTE" javaClass="java.lang.String"/>
+    <rule javaName="billTo" xmlName="po:billTo" xmlType="po:billToType"
+      xmlNodeType="ELEMENT" 
+      javaClass="com.javector.soaj.wsdlgentest.po.Address"/>
+    <rule javaName="items" xmlName="po:item"
+      xmlNodeType="ELEMENT" javaClass="com.javector.soaj.wsdlgentest.po.Item">
+      <wrap>
+        <javaWrap name="items" type="java.util.List"/>
+        <xmlWrap name="po:items"/>
+      </wrap>
+    </rule>
+  </strategy>
+  <!--! </example> -->
+  <strategy javaClass="com.javector.soaj.wsdlgentest.po.PODatabase"
+    xmlType="po:purchaseOrderList">
+    <rule javaName="pos" xmlName="po:purchaseOrder" xmlType="po:purchaseOrder"
+      xmlNodeType="ELEMENT"
+      javaClass="com.javector.soaj.wsdlgentest.po.PurchaseOrder">
+      <wrap>
+        <javaWrap name="pos"
+          type="[Lcom.javector.soaj.wsdlgentest.po.PurchaseOrder;"/>
+        <xmlWrap name="purchaseOrder" type="purchaseOrder"/>
+      </wrap>
+    </rule>
+  </strategy>
+  <strategy javaClass="com.javector.soaj.wsdlgentest.po.PurchaseOrder"
+    xmlType="po:billToType" xmlName="po:billTo">
+    <rule javaName="billTo" xmlName="po:street" xmlType="xs:string"
+      xmlNodeType="ELEMENT" restrictTo="SERIALIZATION">
+      <script><![CDATA[
+        return source.getStreetNum()+" "+source.getStreetName();
+        ]]></script>
+    </rule>
+    <rule javaName="billTo" xmlName="po:city" xmlType="xs:string"
+      xmlNodeType="ELEMENT" restrictTo="SERIALIZATION">
+      <script><![CDATA[
+        return source.getCity();
+        ]]></script>
+    </rule>
+    <rule javaName="billTo" xmlName="po:state" xmlType="xs:string"
+      xmlNodeType="ELEMENT" restrictTo="SERIALIZATION">
+      <script><![CDATA[
+        return source.getState();
+        ]]></script>
+    </rule>
+    <rule javaName="billTo" xmlName="po:zip" xmlType="xs:string"
+      xmlNodeType="ELEMENT" restrictTo="SERIALIZATION">
+      <script><![CDATA[
+        return source.getZip();
+        ]]></script>
+    </rule>
+    <rule javaName="billTo" xmlName="po:phone" xmlType="xs:string"
+      xmlNodeType="ELEMENT" restrictTo="SERIALIZATION">
+      <script><![CDATA[
+        String area = Integer.toString(source.getPhoneNumber().getAreaCode());
+        String exchange = source.getPhoneNumber().getExchange();
+        String num = source.getPhoneNumber().getNumber();
+        return "("+area+") "+exchange+"-"+num;
+      ]]></script>
+    </rule>
+  </strategy>
+</adaptiveMap>

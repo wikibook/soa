@@ -1,0 +1,47 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:tns="http://samples/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  targetNamespace="http://samples/" name="MyHelloService">
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://samples/"
+        schemaLocation="http://soabookdev.scarsdale.javector.com:8080/descriptor-sunweb-endpoint/MyHelloService/__container$publishing$subctx/WEB-INF/wsdl/MyHelloService_schema1.xsd"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
+    </xsd:schema>
+  </types>
+  <message name="sayHello">
+    <part name="parameters" element="tns:sayHello"/>
+  </message>
+  <message name="sayHelloResponse">
+    <part name="parameters" element="tns:sayHelloResponse"/>
+  </message>
+  <portType name="Hello">
+    <operation name="sayHello">
+      <input message="tns:sayHello"/>
+      <output message="tns:sayHelloResponse"/>
+    </operation>
+  </portType>
+  <binding name="HelloPortBinding" type="tns:Hello">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+      style="document"/>
+    <operation name="sayHello">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <!--! <example xn="SUN_WEB_XML_WSDL_GENERATED_WITHOUT_DESCRIPTOR"> -->
+  <!--! <c>chap08</c><s>descriptor</s> -->
+  <service name="MyHelloService">
+    <port name="HelloPort" binding="tns:HelloPortBinding">
+      <soap:address
+        location="http://soabookdev.scarsdale.javector.com:8080/descriptor-sunweb-endpoint/MyHelloService"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
+    </port>
+  </service>
+  <!--! </example> -->
+</definitions>

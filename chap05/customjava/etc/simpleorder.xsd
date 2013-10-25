@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="SimpleOrderXSD"> -->
+<!--! <c>chap05</c><s>customjava</s> -->
+<schema targetNamespace="http://www.example.com/oms"
+  elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:oms="http://www.example.com/oms">
+  <element name="simpleOrder">
+    <complexType>
+      <sequence>
+        <element name="billTo">
+          <complexType>
+            <sequence>
+              <element name="name" type="string"/>
+              <element name="street" type="string"/>
+              <element name="city" type="string"/>
+              <element name="state" type="string"/>
+              <element name="zip" type="string"/>
+              <element name="phone" type="string"/>
+            </sequence>
+          </complexType>
+        </element>
+        <element name="items">
+          <complexType>
+            <sequence>
+              <element name="item" type="oms:ItemType" maxOccurs="unbounded"/>
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <complexType name="ItemType">
+    <sequence>
+      <element name="quantity" type="positiveInteger"/>
+      <element name="price" type="double"/>
+    </sequence>
+    <attribute name="productName" use="required" type="string"/>
+  </complexType>
+</schema>
+<!--! </example> -->

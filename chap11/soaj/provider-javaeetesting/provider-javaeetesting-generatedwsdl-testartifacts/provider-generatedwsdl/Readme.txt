@@ -1,0 +1,1 @@
+Deploy the SoajProvider as a WAR to test invocation capabilities using dynamically generated WSDL.

@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+  http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>soaj</groupId>
+  <artifactId>soaj</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0</version>
+  <name>soaj</name>
+  <modules>
+    <module>plugins</module>
+    <module>core</module>
+    <module>adaptive-config</module>
+    <module>adaptive</module>
+    <module>jaxbimp</module>
+    <module>soaj-config</module>
+    <module>provider</module>
+  </modules>
+  <profiles>
+    <profile>
+      <id>server-tests</id>
+      <modules>
+        <module>provider-javaeetesting</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>all-modules</id> <!-- MDH - i use this for mvn eclipse:eclipse -->
+      <modules>
+        <module>provider-javaeetesting</module>
+      </modules>
+    </profile>
+  </profiles>
+</project>

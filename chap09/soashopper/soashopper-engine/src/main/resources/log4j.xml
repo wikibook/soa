@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration threshold="all" xmlns:log4j="http://jakarta.apache.org/log4j/">
+  <!-- APPENDERS =========================================== -->
+  <!-- For sending debugging warn and errors to console -->
+  <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+    <param name="Threshold" value="info"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%m%n"/>
+    </layout>
+  </appender>
+  <appender name="FILE" class="org.apache.log4j.FileAppender">
+    <param name="File" value="${user.home}/logging/soashopper.log"/>
+    <param name="Threshold" value="debug"/>
+    <param name="immediateFlush" value="true"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%-9r[%t] %-5p %c{5} %m [line %L]%n"/>
+    </layout>
+  </appender>
+  <!-- LOGGERS ============================================= -->
+  <logger name="com.javector">
+    <level value="debug"/>
+    <appender-ref ref="FILE"/>
+  </logger>
+  <root>
+    <level value="debug"/>
+    <appender-ref ref="STDOUT"/>
+  </root>
+</log4j:configuration>

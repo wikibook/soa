@@ -1,0 +1,11 @@
+<projectDescription>
+  <name>provider-testartifact-staticwsdl-ear</name>
+  <comment/>
+  <projects>
+    <project>provider-testartifact-ejb30</project>
+    <project>provider-testartifact-ejb21</project>
+    <project>provider-testartifact-staticwsdl</project>
+  </projects>
+  <buildSpec/>
+  <natures/>
+</projectDescription>

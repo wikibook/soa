@@ -1,0 +1,20 @@
+<projectDescription>
+  <name>provider</name>
+  <comment/>
+  <projects>
+    <project>soaj-config</project>
+    <project>jaxbimp</project>
+    <project>adaptive</project>
+    <project>core</project>
+    <project>adaptive-config</project>
+  </projects>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+      <arguments/>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>

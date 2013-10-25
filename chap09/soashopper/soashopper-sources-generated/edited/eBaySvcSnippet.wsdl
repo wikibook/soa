@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="eBay_wsdl"> -->
+<!--! <c>chap09</c><s>soapclient</s> -->
+<!-- Version 479 -->
+<!-- Copyright (c) 2003-2006 eBay Inc. All Rights Reserved. -->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema targetNamespace="urn:ebay:apis:eBLBaseComponents">
+      <xs:element name="GetSearchResultsRequest"
+        type="ns:GetSearchResultsRequestType"/>
+      <xs:complexType name="GetSearchResultsRequestType">
+        <!-- .... / snip / ...  -->
+        <xs:sequence>
+          <xs:element name="Query" type="xs:string" minOccurs="0"/>
+          <xs:element name="CategoryID" type="xs:string" minOccurs="0"/>
+          <xs:element name="PriceRangeFilter" type="ns:PriceRangeFilterType"
+            minOccurs="0"/>
+          <!-- .... / snip / ...  -->
+        </xs:sequence>
+      </xs:complexType>
+      <!-- .... / snip / ...  -->
+    </xs:schema>
+  </wsdl:types>
+  <!-- .... / snip / ...  -->
+</wsdl:definitions>
+<!--! </example> -->

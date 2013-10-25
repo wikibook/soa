@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:corp="http://www.example.com/corp"
+  targetNamespace="http://www.example.com/css/custinfo"
+  elementFormDefault="qualified">
+  <xs:import namespace="http://www.example.com/corp"
+    schemaLocation="http://soabook.com/example/corp/standardtypes.xsd"/>
+  <xs:element name="order">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="addr" type="corp:AddressType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

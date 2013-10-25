@@ -1,0 +1,18 @@
+<project>
+
+  <import file="${basedir}/../../../../common-build.xml" />
+  
+  <target name="gen-java">
+    <mkdir dir="${basedir}/target/work/java"/>
+    <mkdir dir="${basedir}/target/work/classes"/>
+    <exec executable="${wsimport}">
+      <arg value="-d"/>
+      <arg value="${basedir}/target/work/classes"/>
+      <arg value="-s"/>
+      <arg value="${basedir}/target/work/java"/>
+      <arg value="-keep"/>
+      <arg value="${basedir}/../endpoint/src/webapp/WEB-INF/wsdl/hello.wsdl"/>
+    </exec>
+  </target>
+ 
+</project>

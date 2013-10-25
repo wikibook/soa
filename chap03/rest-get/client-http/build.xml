@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="chap03-client-http" basedir=".">
+  
+  <import file="${basedir}/../../../common-build.xml"/>
+  <property name="context-root" value="chap03-restget-endpoint-servlet-1.0"/>
+
+  <!-- RUN: invoke the Servlet Version RESTful service to get new orders -->
+  <target name="run-servlet">
+    <java classname="samples.GetNewOrders" fork="true"
+      failonerror="true">
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/${context-root}/NewOrders"/>
+      <classpath>
+        <fileset dir="${basedir}/target">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+  </target>
+  
+</project>

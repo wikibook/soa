@@ -1,0 +1,23 @@
+<projectDescription>
+  <name>provider-serversidetestclients-ejbmethodtester</name>
+  <comment/>
+  <projects>
+    <project>soaj-config</project>
+    <project>provider-testartifact-ejb30</project>
+    <project>provider</project>
+    <project>core</project>
+    <project>provider-testartifact-ejb21</project>
+    <project>jaxbimp</project>
+    <project>adaptive</project>
+    <project>adaptive-config</project>
+  </projects>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+      <arguments/>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>

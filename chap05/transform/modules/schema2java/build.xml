@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soashopper-ear" basedir=".">
+  
+  <import file="${basedir}/../../../../common-build.xml"/>
+  <target name="gen-java">
+    <mkdir dir="${basedir}/target/work/java"/>
+    <exec executable="${xjc}" failonerror="true">
+      <arg value="-d"/>
+      <arg value="${basedir}/target/work/java"/>
+      <arg value="http://soabook.com/example/oms/orders.xsd"/>
+    </exec>
+    <exec executable="${xjc}" failonerror="true">
+      <arg value="-d"/>
+      <arg value="${basedir}/target/work/java"/>
+      <arg value="http://soabook.com/example/css/custhistentries.xsd"/>
+    </exec>
+  </target>
+  
+</project>

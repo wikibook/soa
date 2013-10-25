@@ -1,0 +1,18 @@
+<project>
+  
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-glassfish-to-classpath"/>
+    <attainGoal name="gen-java"/>
+  </preGoal>
+
+  <goal name="gen-java" prereqs="book:setenv">
+    <delete dir="${basedir}/src/java"/>
+    <mkdir dir="${basedir}/src/java"/>
+    <exec executable="${glassfish.appsrvr}/bin/${xjc}">
+      <arg value="-d"/>
+      <arg value="${basedir}/src/java"/>
+      <arg value="${basedir}/../../etc/simpleorder_with_bindinglang.xsd"/>
+    </exec>
+  </goal>
+
+</project>

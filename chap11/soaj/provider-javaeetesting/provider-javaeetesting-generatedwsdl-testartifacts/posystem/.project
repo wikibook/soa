@@ -1,0 +1,21 @@
+<projectDescription>
+  <name>provider-testartifact-posystem</name>
+  <comment/>
+  <projects>
+    <project>jaxbimp</project>
+    <project>provider</project>
+    <project>core</project>
+    <project>soaj-config</project>
+    <project>adaptive-config</project>
+    <project>adaptive</project>
+  </projects>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+      <arguments/>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>

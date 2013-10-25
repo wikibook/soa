@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://javector.com/ser/adaptive"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://javector.com/ser/adaptive" elementFormDefault="qualified">
+  <xs:element name="adaptiveMap">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="strategy" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="strategy">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="rule" maxOccurs="unbounded"/>
+        <xs:element ref="property" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="javaClass" type="xs:string" use="required"/>
+      <xs:attribute name="xmlName" type="xs:QName" use="optional"/>
+      <xs:attribute name="xmlType" type="xs:QName" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rule">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="script" type="xs:string" minOccurs="0"/>
+        <xs:element ref="property" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element ref="wrap" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="javaName" type="xs:string" use="required"/>
+      <xs:attribute name="javaClass" type="xs:string" use="optional"/>
+      <xs:attribute name="xmlName" type="xs:QName" use="optional"/>
+      <xs:attribute name="xmlType" type="xs:QName" use="optional"/>
+      <xs:attribute name="xmlNodeType" use="optional" default="ELEMENT">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="ELEMENT"/>
+            <xs:enumeration value="ATTRIBUTE"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="javaType" use="optional" default="FIELD">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="FIELD"/>
+            <xs:enumeration value="METHOD"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="restrictTo" use="optional" default="ALL">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="ALL"/>
+            <xs:enumeration value="SERIALIZATION"/>
+            <xs:enumeration value="DESERIALIZATION"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="handler" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="wrap">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="javaWrap"/>
+        <xs:element ref="xmlWrap"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="javaWrap">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:string"/>
+      <xs:attribute name="type" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="xmlWrap">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:string"/>
+      <xs:attribute name="type" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="property">
+    <xs:complexType>
+      <xs:attribute name="name" type="xs:string" use="optional"/>
+      <xs:attribute name="value" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

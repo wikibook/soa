@@ -1,0 +1,5 @@
+<project>
+
+  <import file="${basedir}/../../../common-build.xml" />
+ 
+</project>

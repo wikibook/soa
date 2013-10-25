@@ -1,0 +1,21 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  
+  
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-jaxb2-to-classpath"/>
+  </preGoal>
+  
+    <target name="run">
+    <attainGoal name="book:setenv"/>
+    <java classname="samples.WrapTestExerciser"
+      failonerror="true" fork="true">
+      <classpath>
+        <path refid="jaxb2.classpath"/>
+        <fileset dir="${basedir}/target">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+  </target>
+
+</project>

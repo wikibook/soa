@@ -1,0 +1,19 @@
+<project>
+
+  <import file="${basedir}/../../../common-build.xml" />
+  
+  <target name="create-war-without-webxml">
+    <exec executable="${ant.home}/bin/${ant_tool}"> <!-- run Ant 1.7 -->
+      <arg value="nodescriptor-war"/>
+    </exec>
+  </target>
+
+  <target name="nodescriptor-war">
+    <war destfile="${basedir}/target/nowebxml.war"
+      needxmlfile="false" excludes="**/web.xml">
+      <classes dir="target/classes"/>
+    </war>
+    <copy file="${basedir}/target/nowebxml.war" tofile="${basedir}/target/chap08-nodescriptor-sibonly-endpoint-nowebxml.war"/>
+  </target>
+ 
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="RPC_LIT_SOAP_REQUEST"> -->
+<!--! <c>chap04</c><s>dispatch</s> -->
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope">
+  <env:Body>
+    <getOrdersDates>
+      <startDate>2005-11-19</startDate>
+      <endDate>2005-11-22</endDate>
+    </getOrdersDates>
+  </env:Body>
+</env:Envelope>
+<!--! </example> -->

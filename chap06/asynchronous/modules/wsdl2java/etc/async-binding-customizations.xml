@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--! <example xn="ASYNC_BINDING_CUST"> -->
+<!--! <c>chap06</c><s>asynchronous</s> -->
+<bindings xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  wsdlLocation="http://localhost:8080/chap06-endpoint-endpoint-1.0/requestOrder?wsdl"
+  xmlns="http://java.sun.com/xml/ns/jaxws">
+  <bindings node="//wsdl:portType[@name='RequestOrderPort']">
+    <bindings node="wsdl:operation[@name='requestOrder']">
+      <enableAsyncMapping>true</enableAsyncMapping>
+    </bindings>
+  </bindings>
+</bindings>
+<!--! </example> -->

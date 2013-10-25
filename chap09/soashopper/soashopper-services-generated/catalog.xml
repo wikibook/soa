@@ -1,0 +1,8 @@
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+  <system
+    systemId="http://soabook.com/example/retail/retail.xsd"
+    uri="./../soashopper-services-soap/src/main/webapp/WEB-INF/wsdl/retail.xsd"/>
+  <system
+    systemId="http://soabook.com/example/faults/faults.xsd"
+    uri="./../../../chap04/wsdl/faults.xsd"/>
+</catalog>

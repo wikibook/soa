@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="SOAP_REQUEST"> -->
+<!--! <c>chap04</c><s>sfwj</s> -->
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope">
+  <env:Body>
+    <custinfo:updateAddress 
+    xmlns:custinfo="http://www.example.com/css/custinfo">
+      <custinfo:custId>ENT0072123</custinfo:custId>
+      <custinfo:address xmlns:corp="http://www.example.com/corp">
+        <corp:addrLine1>27 Main Street</corp:addrLine1>
+        <corp:addrLine2>Suite 2000</corp:addrLine2>
+        <corp:city>New City</corp:city>
+        <corp:state>OH</corp:state>
+        <corp:zip>59101</corp:zip>
+      </custinfo:address>
+    </custinfo:updateAddress>
+  </env:Body>
+</env:Envelope>
+<!--! </example> -->

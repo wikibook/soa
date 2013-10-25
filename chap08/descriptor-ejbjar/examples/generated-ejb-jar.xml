@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" metadata-complete="true"
+  version="3.0" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+  http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd">
+  <enterprise-beans>
+    <session>
+      <display-name>Hello</display-name>
+      <ejb-name>Hello</ejb-name>
+      <service-endpoint>samples.Hello</service-endpoint>
+      <ejb-class>samples.Hello</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+      <env-entry>
+        <env-entry-name>myString</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>ZipZapZang!</env-entry-value>
+        <injection-target>
+          <injection-target-class>samples.Hello</injection-target-class>
+          <injection-target-name>injectedString</injection-target-name>
+        </injection-target>
+      </env-entry>
+      <!--! <example xn="EJB_JAR_GENERATED_EJB_REF"> -->
+      <!--! <c>chap08</c><s>descriptor</s> -->
+      <ejb-ref>
+        <ejb-ref-name>samples.Hello/goodbye</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>samples.Goodbye</remote>
+        <injection-target>
+          <injection-target-class>samples.Hello</injection-target-class>
+          <injection-target-name>goodbye</injection-target-name>
+        </injection-target>
+      </ejb-ref>
+      <!--! </example> -->
+      <service-ref>
+        <display-name>samples.Hello/port</display-name>
+        <service-ref-name>samples.Hello/port</service-ref-name>
+        <service-interface>samples.MyWebService</service-interface>
+        <service-ref-type>samples.MyWeb</service-ref-type>
+        <wsdl-file>http://localhost:8080/myweb/MyWebService?wsdl</wsdl-file>
+        <service-qname xmlns:service-qname_ns__="http://samples/"
+          >service-qname_ns__:MyWebService</service-qname>
+        <injection-target>
+          <injection-target-class>samples.Hello</injection-target-class>
+          <injection-target-name>port</injection-target-name>
+        </injection-target>
+      </service-ref>
+      <security-identity>
+        <use-caller-identity/>
+      </security-identity>
+    </session>
+  </enterprise-beans>
+</ejb-jar>

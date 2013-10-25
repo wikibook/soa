@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soashopper-ear" basedir=".">
+  
+  <import file="${basedir}/../../../../common-build.xml"/>
+
+  <target name="run-mysimpleorderserializer">
+    <java classname="samples.MySimpleOrderSerializer"
+      failonerror="true" fork="true">
+      <classpath>
+        <path refid="glassfish.webservices.path"/>
+        <fileset dir="${basedir}/target">
+          <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${basedir}/../schema2java/target">
+          <include name="*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+  </target>
+  
+</project>

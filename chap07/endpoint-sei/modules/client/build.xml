@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="chap07-endpoint-sei" basedir=".">
+  
+  <import file="${basedir}/../../../../common-build.xml"/>
+
+  <property name="module" value="chap07-endpoint-sei-endpoint-1.0"/>
+  <property name="artifact" value="${basedir}/../endpoint/target/${module}.war"/>
+  
+</project>

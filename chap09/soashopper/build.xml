@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soashopper-ear" basedir=".">
+  
+  <import file="${basedir}/../../common-build.xml"/>
+  <property name="module" value="soashopper-ear-1.0"/>
+  <property name="artifact" 
+    value="${basedir}/soashopper-ear/target/${module}.ear"/>
+  
+</project>

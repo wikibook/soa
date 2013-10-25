@@ -1,0 +1,7 @@
+<!--! <example xn="SOAP_FAULT_FROM_WEBSERVICESEXCEPTION"> -->
+<!--! <c>chap07</c><s>faults</s> -->
+<SOAP-ENV:Fault xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <faultstring>Expired ccard.</faultstring>
+  <faultcode>SOAP-ENV:Server</faultcode>
+</SOAP-ENV:Fault>
+<!--! </example> -->

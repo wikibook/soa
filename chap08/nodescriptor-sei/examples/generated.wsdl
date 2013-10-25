@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:tns="http://samples/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  targetNamespace="http://samples/" name="HelloService">
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://samples/"
+        schemaLocation="http://soabookdev.scarsdale.javector.com:8080/HelloService/Hello/__container$publishing$subctx/META-INF/wsdl/HelloService_schema1.xsd"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
+    </xsd:schema>
+  </types>
+  <message name="sayHello">
+    <part name="parameters" element="tns:sayHello"/>
+  </message>
+  <message name="sayHelloResponse">
+    <part name="parameters" element="tns:sayHelloResponse"/>
+  </message>
+  <!--! <example xn="DEFAULT_WSDL_SNIPPET_SIB_SEI"> -->
+  <!--! <c>chap08</c><s>nodescriptor</s> -->
+  <portType name="HelloInf">
+    <operation name="sayHello">
+      <input message="tns:sayHello"/>
+      <output message="tns:sayHelloResponse"/>
+    </operation>
+  </portType>
+  <binding name="HelloPortBinding" type="tns:HelloInf">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+      style="document"/>
+    <operation name="sayHello">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="HelloService">
+    <port name="HelloPort" binding="tns:HelloPortBinding">
+      <soap:address
+        location="http://soabookdev.scarsdale.javector.com:8080/HelloService/Hello"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"/>
+    </port>
+  </service>
+  <!--! </example> -->
+</definitions>

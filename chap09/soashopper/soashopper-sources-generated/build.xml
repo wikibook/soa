@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soashopper-engine" basedir=".">
+  <import file="${basedir}/../../../common-build.xml" />
+
+  <!-- Compile WSDL and Schema from Shopping Sources-->
+  <!--! <example xn="xjc_yahoo"> -->
+  <!--! <c>chap09</c><s>restclient</s> -->
+  <target name="compile-yahoo-schema">
+    <delete dir="${java.generated}/yahoo" />
+    <!-- product search schema -->
+    <exec executable="${xjc}">
+      <arg line="-d ${java.generated}" />
+      <arg value="http://api.shopping.yahoo.com/shoppingservice/v2/productsearch.xsd" />
+      <arg value="http://api.shopping.yahoo.com/shoppingservice/v1/merchantsearch.xsd" />
+      <arg value="http://api.shopping.yahoo.com/shoppingservice/v1/cataloglisting.xsd" />
+      <arg value="http://api.shopping.yahoo.com/shoppingservice/v1/catalogspecs.xsd" />
+      <arg value="http://api.shopping.yahoo.com/ShoppingService/v1/userproductreview.xsd" />
+    </exec>
+  </target>
+  <!--! </example> -->
+  <!--! <example xn="wsimport_ebay"> -->
+  <!--! <c>chap09</c><s>soapclient</s> -->
+  <target name="compile-ebay-wsdl">
+    <delete dir="${java.generated}/ebay" />
+    <exec executable="${wsimport}">
+      <!-- needed because ebay wsdl is huge -->
+      <env key="VMARGS" value="-Xmx512m" />
+      <!-- suppress the warning messages -->
+      <arg value="-quiet" />
+      <arg value="-keep" />
+      <arg line="-d target/junk" />
+      <arg line="-s ${java.generated}" />
+      <arg value="http://developer.ebay.com/webservices/479/eBaySvc.wsdl" />
+    </exec>
+  </target>
+  <!--! </example> -->
+  <target name="compile-amazon-wsdl">
+    <delete dir="${java.generated}/com/amazon" />
+    <exec executable="${wsimport}">
+      <arg value="-keep" />
+      <arg line="-d target/junk" />
+      <arg line="-s ${java.generated}" />
+      <arg value="http://webservices.amazon.com/AWSECommerceService/2007-02-22/AWSECommerceService.wsdl" />
+    </exec>
+  </target>
+
+  <target name="generate-shopping-apis">
+    <condition property="do.not.generate">
+      <equals arg1="${do.not.build}" arg2="true" />
+    </condition>
+    <antcall target="generate-shopping-apis-conditional" />
+  </target>
+
+  <target name="generate-shopping-apis-conditional" unless="do.not.generate">
+    <mkdir dir="target/junk" />
+    <antcall target="compile-amazon-wsdl" />
+    <antcall target="compile-yahoo-schema" />
+    <antcall target="compile-ebay-wsdl" />
+  </target>
+
+</project>

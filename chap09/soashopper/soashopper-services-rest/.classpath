@@ -1,0 +1,14 @@
+<classpath>
+  <classpathentry kind="src" path="src/main/java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="src" path="/soashopper-engine"/>
+  <classpathentry kind="src" path="/soashopper-services-generated"/>
+  <classpathentry kind="src" path="/soashopper-sources-generated"/>
+  <classpathentry kind="lib" path="C:/bin/glassfish-v2-b41/lib/activation.jar"/>
+  <classpathentry kind="lib" path="C:/bin/glassfish-v2-b41/lib/webservices-rt.jar"/>
+  <classpathentry kind="src" path="/soashopper-servicesimp"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14.jar"/>
+  <classpathentry kind="lib" path="C:/bin/glassfish-v2-b41/lib/javaee.jar"/>
+</classpath>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="EJB_JAR_XML"> -->
+<!--! <c>chap08</c><s>descriptor</s> -->
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  metadata-complete="false" version="3.0"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+  http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd">
+  <enterprise-beans>
+    <session>
+      <ejb-name>Hello</ejb-name>
+      <service-endpoint>samples.Hello</service-endpoint>
+      <ejb-class>samples.Hello</ejb-class>
+      <session-type>Stateless</session-type>
+      <env-entry>
+        <env-entry-name>myString</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>ZipZapZang!</env-entry-value>
+      </env-entry>
+      <service-ref>
+        <service-ref-name>samples.Hello/port</service-ref-name>
+        <service-interface>samples.MyWebService</service-interface>
+        <wsdl-file>http://localhost:8080/chap08-descriptor-ejbjar-mywebservice-nowebxml/MyWebService?wsdl</wsdl-file>
+      </service-ref>
+    </session>
+  </enterprise-beans>
+</ejb-jar>
+<!--! </example> -->

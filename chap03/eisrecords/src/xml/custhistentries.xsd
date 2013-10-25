@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!--! <example xn="CustomerHistorySchemaFragment"> -->
+<!--! <c>chap03</c><s>eisrecords</s> -->
+<schema targetNamespace="http://www.example.com/css"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:css="http://www.example.com/css" version="1.0"
+  elementFormDefault="qualified">
+  <element name="CustomerHistoryEntries" type="css:CustomerHistoryEntriesType"/>
+  <element name="CustomerHistoryEntry" type="css:CustomerHistoryEntryType"/>
+  <complexType name="CustomerHistoryEntriesType">
+    <sequence>
+      <element ref="css:CustomerHistoryEntry" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <complexType name="CustomerHistoryEntryType">
+    <sequence>
+      <element name="CustomerNumber">
+        <annotation>
+          <documentation>Unique Customer Identifier</documentation>
+        </annotation>
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="10"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="OrderLookupInfo">
+        <annotation>
+          <documentation>Keys and searchable text that can be used to look up
+            additional order information from the OMS</documentation>
+        </annotation>
+        <complexType>
+          <sequence>
+            <element name="OrderNumber">
+              <annotation>
+                <documentation>Unique Sales Order Identifier - Key for CSS
+                  lookup of order records</documentation>
+              </annotation>
+              <simpleType>
+                <restriction base="string">
+                  <maxLength value="10"/>
+                </restriction>
+              </simpleType>
+            </element>
+            <!--! </example> -->
+            <element name="PURCH_ORD_NO">
+              <annotation>
+                <documentation>Customer purchase order number - can also be used
+                  to search Order HIstory</documentation>
+              </annotation>
+              <simpleType>
+                <restriction base="string">
+                  <maxLength value="35"/>
+                </restriction>
+              </simpleType>
+            </element>
+            <element name="ITM_NUMBER" maxOccurs="unbounded">
+              <annotation>
+                <documentation>Unique identifier for an item - can also be used
+                  to search Order HIstory.</documentation>
+              </annotation>
+              <simpleType>
+                <restriction base="string">
+                  <maxLength value="6"/>
+                  <pattern value="\d+"/>
+                </restriction>
+              </simpleType>
+            </element>
+            <element name="OrderText" minOccurs="0">
+              <annotation>
+                <documentation>Short text describing sales order item. Can
+                  perform a full text search on this file if ITM_NUMBER is not
+                  available</documentation>
+              </annotation>
+              <simpleType>
+                <restriction base="string">
+                  <maxLength value="255"/>
+                </restriction>
+              </simpleType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+    </sequence>
+  </complexType>
+  <element name="voidResponse" type="css:VoidResponseType"/>
+  <complexType name="VoidResponseType"/>
+</schema>

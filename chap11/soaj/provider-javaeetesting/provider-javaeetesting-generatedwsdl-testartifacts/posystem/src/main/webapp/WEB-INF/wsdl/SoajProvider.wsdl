@@ -1,0 +1,55 @@
+<definitions name="SoajProvider"
+  targetNamespace="http://javector.com/soaj/provider"
+  xmlns:tns="http://javector.com/soaj/provider"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+      targetNamespace="http://javector.com/soaj/provider"
+      elementFormDefault="qualified">
+      <element name="doSomething">
+        <complexType>
+        <sequence>
+          <element name="arg0" type="xsd:string"/>
+        </sequence>
+      </complexType>
+      </element>
+      <element name="getBillToResponse">
+        <complexType>
+        <sequence/>
+      </complexType>
+      </element>
+    </xsd:schema>
+  </types>
+  <message name="request">
+    <part name="parameters" element="tns:getBillTo"/>
+  </message>
+  <message name="response">
+    <part name="parameters" element="tns:getBillToResponse"/>
+  </message>
+  <portType name="SoajProviderPortType">
+    <operation name="doSomething">
+      <input message="tns:request"/>
+      <output message="tns:response"/>
+    </operation>
+  </portType>
+  <binding name="SoajProviderBinding" type="tns:SoajProviderPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+      style="document"/>
+    <operation name="doSomething">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="SoajProviderService">
+    <port name="SoajProviderPort" binding="tns:SoajProviderBinding">
+      <soap:address location="defined-at-deployment-time"/>
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="chap07-endpoint-endpoint" basedir=".">
+  
+  <import file="${basedir}/../../common-build.xml"/>
+  <property name="module" value="chap07-endpoint-endpoint-1.0"/>
+
+  <target name="run">
+    <java jar="${basedir}/target/${module}.jar" jvm="${jdk6.home}/bin/java" fork="true"
+      failonerror="true"/>
+  </target>
+  
+  <target name="gen-java">
+    <mkdir dir="${basedir}/target/work/java"/>
+    <mkdir dir="${basedir}/target/classes"/>
+    <exec executable="${jdk6.home}/bin/wsimport">
+      <arg value="-d"/>
+      <arg value="${basedir}/target/classes"/>
+      <arg value="-s"/>
+      <arg value="${basedir}/target/work/java"/>
+      <arg value="-keep"/>
+      <arg value="-wsdllocation"/>
+      <arg value="META-INF/wsdl/RequestOrder.wsdl"/>
+      <arg value="${basedir}/src/META-INF/wsdl/RequestOrder.wsdl"/>
+    </exec>
+    <copy todir="${basedir}/target/work/java">
+      <fileset dir="${basedir}/src/java">
+        <include name="**/*.java"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="copy-wsdl">
+    <copy file="${basedir}/src/META-INF/wsdl/RequestOrder.wsdl"
+      todir="${basedir}/target/classes"/>
+  </target>
+    
+
+</project>

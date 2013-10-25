@@ -1,0 +1,30 @@
+<project>
+
+  <import file="${basedir}/../../../../common-build.xml" />
+  
+  <target name="filter-sources">
+    <mkdir dir="${basedir}/target/work"/>
+    <copy todir="${basedir}/target/work">
+      <fileset dir="${basedir}/src">
+        <include name="java/**"/>
+        <exclude name="**/.svn/**"/>
+      </fileset>
+    </copy>
+    <copy todir="${basedir}/target/work/java">
+      <fileset dir="${basedir}/src/ejb">
+        <include name="META-INF/**"/>
+        <exclude name="**/.svn/**"/>
+      </fileset>
+      <filterset begintoken="l" endtoken="0">
+        <filter token="ocalhost:808" value="${glassfish.host}:${glassfish.deploy.port}"/>
+      </filterset>
+    </copy>
+  </target>
+
+  <target name="webref-import">
+    <copy todir="${basedir}/target/classes">
+      <fileset dir="${basedir}/../mywebservice-wsdl2java/target/classes"/>
+    </copy>
+  </target>
+
+</project>

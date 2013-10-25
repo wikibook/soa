@@ -1,0 +1,43 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  
+  <goal name="build" prereqs="clean">
+    <attainGoal name="multiproject:install"/>
+    <attainGoal name="jar"/>
+  </goal>
+  
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-glassfish-to-classpath"/>
+    <path id="local.classpath">
+      <fileset dir="${basedir}/modules/schema2java/target">
+        <include name="**/*.jar"/>
+      </fileset>
+    </path>
+    <maven:addPath id="maven.dependency.classpath" refid="local.classpath"/>
+  </preGoal>
+  
+  <!-- RUN: get the new orders and write the customer histories -->
+  <target name="run">
+    <mkdir dir="${user.home}/tmp"/>
+    <delete>
+     <fileset dir="${user.home}/tmp" includes="soabook*.xml"/>
+    </delete>
+    <attainGoal name="book:setenv"/>
+    <java classname="samples.OrderToCustHistJAXB"
+      failonerror="true" fork="true">
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/rest-get-servlet/NewOrders"/>
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/rest-post-servlet/CustomerHistory?SourceSystem=OMS"/>
+      <classpath>
+        <path refid="glassfish.classpath"/>
+        <fileset dir="${maven.build.dir}">
+          <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${basedir}/modules/schema2java">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+  </target>
+
+</project>

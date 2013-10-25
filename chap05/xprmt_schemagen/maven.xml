@@ -1,0 +1,23 @@
+<project>
+  
+  <goal name="gen-schema">
+    <exec executable="${jaxb2.home}/bin/schemagen.sh">
+      <arg value="${basedir}/src/java/samples/Test.java"/>
+      </exec>
+  </goal>
+  
+  <target name="run">
+    <attainGoal name="jar"/>
+    <attainGoal name="book:setenv"/>
+    <java classname="samples.Tester"
+      failonerror="true" fork="true">
+      <classpath>
+        <path refid="jaxb2.classpath"/>
+        <fileset dir="${basedir}/target">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+  </target>
+
+</project>

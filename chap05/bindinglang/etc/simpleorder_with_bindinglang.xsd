@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="schema-globalbinding"> -->
+<!--! <c>chap05</c><s>bindinglang</s> -->
+<schema targetNamespace="http://www.example.com/oms"
+  elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0"
+  xmlns:oms="http://www.example.com/oms">
+  <annotation>
+    <appinfo>
+      <jaxb:globalBindings localScoping="toplevel"/>
+      <jaxb:schemaBindings>
+        <jaxb:package name="samples"/>
+      </jaxb:schemaBindings>
+    </appinfo>
+  </annotation>
+  <!--! </example> -->
+  <!--! <example xn="schema-simpleOrder"> -->
+  <!--! <c>chap05</c><s>bindinglang</s> -->
+  <element name="simpleOrder">
+    <annotation>
+      <appinfo>
+        <jaxb:class name="MySimpleOrder"/>
+      </appinfo>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="billTo">
+          <complexType>
+            <annotation>
+              <appinfo>
+                <jaxb:class name="MyAddress"/>
+              </appinfo>
+            </annotation>
+            <sequence>
+              <element name="name" type="string"/>
+              <element name="street" type="string"/>
+              <element name="city" type="string"/>
+              <element name="state" type="string"/>
+              <element name="zip" type="string"/>
+              <element name="phone" type="string"/>
+            </sequence>
+          </complexType>
+        </element>
+    <!--! </example> -->
+        <element name="items">
+          <complexType>
+            <sequence>
+              <element name="item" type="oms:ItemType" maxOccurs="unbounded"/>
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <!--! <example xn="schema-MyItem"> -->
+  <!--! <c>chap05</c><s>bindinglang</s> -->
+  <complexType name="ItemType">
+    <annotation>
+      <appinfo>
+        <jaxb:class name="MyItem"/>
+      </appinfo>
+    </annotation>
+    <sequence>
+      <element name="quantity" type="positiveInteger">
+        <annotation>
+          <appinfo>
+            <jaxb:property>
+              <jaxb:baseType>
+                <jaxb:javaType name="int"
+                  parseMethod="javax.xml.bind.DatatypeConverter.parseInt"
+                  printMethod="javax.xml.bind.DatatypeConverter.printInt"/>
+              </jaxb:baseType>
+            </jaxb:property>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="price" type="double">
+        <annotation>
+          <appinfo>
+            <jaxb:property>
+              <jaxb:baseType>
+                <jaxb:javaType name="float"
+                  parseMethod="javax.xml.bind.DatatypeConverter.parseFloat"
+                  printMethod="javax.xml.bind.DatatypeConverter.printFloat"/>
+              </jaxb:baseType>
+            </jaxb:property>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+    <attribute name="productName" use="required" type="string"/>
+  </complexType>
+</schema>
+<!--! </example> -->

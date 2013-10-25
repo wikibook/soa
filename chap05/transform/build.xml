@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soashopper-ear" basedir=".">
+  
+  <import file="${basedir}/../../common-build.xml"/>
+
+<target name="bogus"><echo message="user.home = ${user.home}"/></target>
+
+  <target name="run-ordertocusthistjaxb">
+    <echo message="WRITING RESULTS TO: ${user.home}/tmp"/>
+    <mkdir dir="${user.home}/tmp"/>
+    <delete quiet="true">
+     <fileset dir="${user.home}/tmp" includes="soabook*.xml"/>
+    </delete>
+    <java classname="samples.OrderToCustHistJAXB"
+      failonerror="true" fork="true">
+      <classpath>
+        <path refid="glassfish.webservices.path"/>
+        <fileset dir="${basedir}/target">
+          <include name="*.jar"/>
+        </fileset>
+      </classpath>
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/chap03-restget-endpoint-servlet-1.0/NewOrders"/>
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/chap03-restpost-endpoint-servlet-1.0/CustomerHistory?SourceSystem=OMS"/>
+    </java>
+  </target>
+
+  <target name="copy-sources">
+    <mkdir dir="${basedir}/target/work/java"/>
+    <copy todir="${basedir}/target/work/java">
+      <fileset dir="${basedir}/modules/schema2java/target/work/java">
+        <include name="**/*.java"/>
+      </fileset>
+    </copy>
+    <copy todir="${basedir}/target/work/java">
+      <fileset dir="${basedir}/src/java">
+        <include name="**/*.java"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="gen-schema">
+    <exec executable="${mvn}">
+      <arg value="-f"/>
+      <arg value="modules/schema2java/pom.xml"/>
+      <arg value="clean"/>
+      <arg value="install"/>
+    </exec>
+  </target>
+  
+</project>

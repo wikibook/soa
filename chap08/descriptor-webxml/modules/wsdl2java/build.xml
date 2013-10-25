@@ -1,0 +1,34 @@
+<project>
+
+  <import file="${basedir}/../../../../common-build.xml" />
+  
+  <target name="gen-wsdl">
+    <mkdir dir="${basedir}/target/work/wsdl"/>
+    <mkdir dir="${basedir}/target/work/java"/>
+    <exec executable="${wsgen}">
+      <arg value="-cp"/>
+      <arg value="${basedir}/../endpoint/target/classes"/>
+      <arg value="-d"/>
+      <arg value="${basedir}/target/work/wsdl"/>
+      <arg value="-s"/>
+      <arg value="${basedir}/target/work/java"/>
+      <arg value="-keep"/>
+      <arg value="-wsdl"/>
+      <arg value="samples.Hello"/>
+    </exec>
+  </target>
+  
+  <target name="gen-java">
+    <mkdir dir="${basedir}/target/work/java"/>
+    <mkdir dir="${basedir}/target/classes"/>
+    <exec executable="${wsimport}">
+      <arg value="-d"/>
+      <arg value="${basedir}/target/classes"/>
+      <arg value="-s"/>
+      <arg value="${basedir}/target/work/java"/>
+      <arg value="-keep"/>
+      <arg value="${basedir}/target/work/wsdl/HelloService.wsdl"/>
+    </exec>
+  </target>
+ 
+</project>

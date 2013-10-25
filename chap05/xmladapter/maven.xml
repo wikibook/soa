@@ -1,0 +1,22 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  
+  <goal name="build" prereqs="clean, jar"/>
+
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-glassfish-to-classpath"/>
+  </preGoal>
+  
+  <goal name="run" prereqs="book:setenv">
+    <java classname="samples.AddressSerializer"
+      failonerror="true" fork="true">
+      <classpath>
+        <path refid="glassfish.classpath"/>
+        <fileset dir="${basedir}/target">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+      <arg value="${basedir}/etc/orderElement.xsd"/>
+    </java>
+  </goal>
+
+</project>

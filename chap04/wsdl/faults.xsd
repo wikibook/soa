@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.example.com/faults"
+  xmlns:faults="http://www.example.com/faults" elementFormDefault="qualified"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!--! <example xn="FAULT"> -->
+  <!--! <c>chap04</c><s>wsdl</s> -->
+  <xs:element name="inputMessageValidationFault"
+    type="faults:InputMessageValidationFaultType"/>
+  <xs:complexType name="InputMessageValidationFaultType">
+    <xs:attribute name="msg" type="xs:string"/>
+  </xs:complexType>
+  <!--! </example> -->
+</xs:schema>

@@ -1,0 +1,27 @@
+<classpath>
+  <classpathentry kind="src" path="src/main/java"/>
+  <classpathentry kind="src" path="src/main/resources"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="lib" path="C:/bin/glassfish-v2-b41/lib/webservices-tools.jar"/>
+  <classpathentry kind="var" path="M2_REPO/soaj/eclipse/wst/org.apache.xerces_2.7.0.v200602052214.xml-apis/1.0.3/org.apache.xerces_2.7.0.v200602052214.xml-apis-1.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/soaj/eclipse/wst/org.eclipse.wst.wsdl.validation_1.0.1.v200603152158/1.0.3/org.eclipse.wst.wsdl.validation_1.0.1.v200603152158-1.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/soaj/eclipse/wst/org.apache.xerces_2.7.0.v200602052214.resolver/1.0.3/org.apache.xerces_2.7.0.v200602052214.resolver-1.0.3.jar"/>
+  <classpathentry kind="src" path="/jaxbimp"/>
+  <classpathentry kind="src" path="/provider"/>
+  <classpathentry kind="var" path="M2_REPO/groovy/groovy-all/1.0-jsr-03/groovy-all-1.0-jsr-03.jar"/>
+  <classpathentry kind="src" path="/core"/>
+  <classpathentry kind="var" path="M2_REPO/ant/ant/1.6.5/ant-1.6.5.jar"/>
+  <classpathentry kind="src" path="/soaj-config"/>
+  <classpathentry kind="var" path="M2_REPO/soaj/jaxb2-reflection/jaxb2-reflection/20060912/jaxb2-reflection-20060912.jar"/>
+  <classpathentry kind="src" path="/adaptive-config"/>
+  <classpathentry kind="src" path="/adaptive"/>
+  <classpathentry kind="var" path="M2_REPO/soaj/eclipse/wst/org.apache.xerces_2.7.0.v200602052214.xercesImpl/1.0.3/org.apache.xerces_2.7.0.v200602052214.xercesImpl-1.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/antlr/antlr/2.7.2/antlr-2.7.2.jar"/>
+  <classpathentry kind="lib" path="C:/bin/glassfish-v2-b41/lib/webservices-rt.jar"/>
+  <classpathentry kind="var" path="M2_REPO/velocity/velocity/1.4-dev/velocity-1.4-dev.jar"/>
+  <classpathentry kind="lib" path="C:/bin/glassfish-v2-b41/lib/javaee.jar"/>
+  <classpathentry kind="var" path="M2_REPO/soaj/eclipse/wst/org.wsdl4j_1.4.0.v200602131706.wsdl4j/1.0.3/org.wsdl4j_1.4.0.v200602131706.wsdl4j-1.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/xalan/xalan/2.7.0/xalan-2.7.0.jar"/>
+</classpath>

@@ -1,0 +1,28 @@
+<project default="compileschema">
+  <property name="gen_src" value="target/generated/src/main/java"/>
+  <property name="schema_dir" value="../adaptive/src/main/resources/config"/>
+  <target name="check_for_schema_change">
+    <echo message="checking if schema has changed ..."/>
+    <dependset>
+      <srcfileset dir="${schema_dir}" includes="*.xsd"/>
+      <targetfilelist dir="target" files="last.build.timestamp"/>
+    </dependset>
+    <available property="dont.compile.schema" file="target/last.build.timestamp"
+    />
+  </target>
+  <target name="compileschema" depends="check_for_schema_change"
+    unless="dont.compile.schema">
+    <path id="classpath">
+      <path refid="maven.compile.classpath"/>
+      <path refid="maven.plugin.classpath"/>
+    </path>
+    <taskdef name="xjc" classname="com.sun.tools.xjc.XJC2Task"
+      classpathref="classpath"/>
+    <delete dir="target" quiet="true"/>
+    <mkdir dir="${gen_src}"/>
+    <xjc destdir="${gen_src}">
+      <schema dir="${schema_dir}" includes="*.xsd"/>
+      <arg value="-npa"/>
+    </xjc>
+  </target>
+</project>

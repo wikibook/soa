@@ -1,0 +1,49 @@
+<soajConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://javector.com/soaj/config ../../../../../../../provider/src/main/resources/config/soaj-config.xsd"
+                   xmlns:po="http://javector.com/ser/adaptive/po"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:xs1="http://www.w3.org/2001/XMLSchema"
+                   xmlns="http://javector.com/soaj/config">
+    <soajWSDL wsdlName="PoSystem"
+              wsdlNamespace="http://javector.com/soaj/provider/posystem">
+        <soajService serviceName="SoajProviderService">
+            <soajPort portName="SoajProviderPort"
+                      endpoint="http://localhost:8080/posystem/soaj/updateService">
+                <soajOperation operationName="updateAddress">
+                    <soajPOJOMethod javaMethod="updateAddress"
+                                    javaClass="com.javector.soaj.wsdlgentest.po.PurchaseOrderProcessing">
+                        <paramClass>com.javector.soaj.wsdlgentest.po.Address</paramClass>
+                        <paramClass>java.lang.String</paramClass>
+                    </soajPOJOMethod>
+                    <parameterMapping>
+                        <javaClass>com.javector.soaj.wsdlgentest.po.Address</javaClass>
+                        <xmlElement>
+                            <eltName>po:billTo</eltName>
+                            <eltType>po:BillToType</eltType>
+                        </xmlElement>
+                    </parameterMapping>
+                    <parameterMapping>
+                        <javaClass>java.lang.String</javaClass>
+                        <xmlElement>
+                            <eltName>string</eltName>
+                            <eltType>xs:string</eltType>
+                        </xmlElement>
+                    </parameterMapping>
+                    <returnMapping>
+                        <javaClass>void</javaClass>
+                        <xmlElement>
+                            <eltRef>xs:void</eltRef>
+                        </xmlElement>
+                    </returnMapping>
+                </soajOperation>
+            </soajPort>
+        </soajService>
+    </soajWSDL>
+    <mappingXml>config/adaptivemap.xml</mappingXml>
+    <userDefinedSchemas>
+        <userDefinedSchema>
+            <targetNamespace>http://javector.com/ser/adaptive/po</targetNamespace>
+            <schemaLocation>http://localhost:8080/posystem/config/purchaseOrder.xsd</schemaLocation>
+        </userDefinedSchema>
+    </userDefinedSchemas>
+</soajConfiguration>

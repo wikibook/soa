@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!--! <example xn="WSDL_UpdateAddress"> -->
+  <!--! <c>chap04</c><s>sfwj</s> -->
+<wsdl:definitions targetNamespace="http://www.example.com/css/custinfo"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:custinfo="http://www.example.com/css/custinfo"
+  xmlns:css="http://www.example.com/css"
+  xmlns:corp="http://www.example.com/corp"
+  xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/
+  http://schemas.xmlsoap.org/wsdl/ http://schemas.xmlsoap.org/wsdl/soap/
+  http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified"
+      targetNamespace="http://www.example.com/corp">
+      <xs:include
+        schemaLocation="http://soabook.com/example/corp/standardtypes.xsd"/>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified"
+      targetNamespace="http://www.example.com/css/custinfo">
+      <xs:element name="updateAddress">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="custId" type="xs:string"/>
+            <xs:element name="address" type="corp:AddressType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateAddressResponse">
+        <xs:complexType/>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="updateAddressRequestMessage">
+    <wsdl:part name="parameters" element="custinfo:updateAddress"/>
+  </wsdl:message>
+  <wsdl:message name="getAddressResponseMessage">
+    <wsdl:part name="parameters" element="custinfo:updateAddressResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CustomerAddressUpdatePort">
+    <wsdl:operation name="updateAddress">
+      <wsdl:input message="custinfo:updateAddress"/>
+      <wsdl:output message="custinfo:updateAddressResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <!--! </example> -->
+  <wsdl:binding name="CustomerAddressUpdateSOAPBinding"
+    type="custinfo:CustomerAddressUpdatePort">
+    <soap:binding style="document"
+      transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="updateAddress">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CustomerAddressUpdateService">
+    <wsdl:port name="custinfo:CustomerAddressUpdatePort"
+      binding="custinfo:CustomerAddressUpdateSOAPBinding">
+      <soap:address location="http://localhost:8080/css/customeraddr"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

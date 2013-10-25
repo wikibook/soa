@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soashopper" basedir=".">
+	<import file="${basedir}/../../../common-build.xml" />
+
+	<target name="compile-soashopper-wsdl">
+		<delete dir="${java.generated}/com/javector" />
+		<mkdir dir="target/junk" />
+		<mkdir dir="${java.generated}" />
+		<exec executable="${wsimport}">
+			<arg value="-keep" />
+			<arg line="-d target/junk" />
+			<arg line="-s ${java.generated}" />
+			<arg line="-catalog catalog.xml" />
+			<arg value="${basedir}/../soashopper-services-soap/src/main/webapp/WEB-INF/wsdl/soashopper.wsdl" />
+		</exec>
+	</target>
+
+</project>

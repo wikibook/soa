@@ -1,0 +1,11 @@
+<project>
+  
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-glassfish-to-classpath"/>
+  </preGoal>
+  
+  <preGoal name="java:prepare-filesystem">
+    <attainGoal name="clean"/>
+  </preGoal>
+
+</project>

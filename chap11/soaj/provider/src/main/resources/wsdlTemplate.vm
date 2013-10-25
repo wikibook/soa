@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+#set ($nameSpaceObjects = $hashMap.keySet().toArray())
+<definitions
+	name="${WsdlName}"
+	targetNamespace="$targetNamespace"
+	xmlns:tns="$targetNamespace"
+     #foreach($nameSpaceObject in $nameSpaceObjects)
+     #set($prefix = $hashMap.get($nameSpaceObject))
+     xmlns:$prefix ="$nameSpaceObject"
+     #end
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<types>
+	     #foreach($userDefinedSchema in $userDefinedSchemas)
+        <xsd:schema targetNamespace="$userDefinedSchema.getTargetNamespace().trim()">
+          <xsd:include schemaLocation="$userDefinedSchema.getSchemaLocation().trim()"/>
+        </xsd:schema>
+	    #end
+
+		<xsd:schema
+			xmlns="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="$targetNamespace"
+			elementFormDefault="qualified">
+        #foreach($userDefinedSchema in $userDefinedSchemas)
+         <xsd:import namespace="$userDefinedSchema.getTargetNamespace().trim()"/>
+	    #end
+   #foreach($serviceDTO in $serviceDTOList)
+            #set($ServiceName =$serviceDTO.getServiceName())
+            #set ($soajPortDTOList =$serviceDTO.getSoajPortDTOs())
+        #foreach($soajPortDTO in $soajPortDTOList)
+              #set ($PortName = $soajPortDTO.getPortName())
+              #set( $soajOperationDTOList=$soajPortDTO.getSoajOperationDTOs())
+            #foreach($soajOperationDTO in $soajOperationDTOList)
+			  #set ($OperationName= $soajOperationDTO.getOperationName())
+		<element name="${OperationName}">
+			<complexType>
+			<sequence>
+			      #set ($i=0)
+			      #set ($inputParamList= $soajOperationDTO.getParamMapping())
+               #foreach($inputParamType in $inputParamList)
+                 #set($prefix=$hashMap.get($inputParamType.getTypeOrElementQName().getNamespaceURI()))
+                 #if ( $inputParamType.getXmlType() )
+                   <element name="$inputParamType.getXmlName().getLocalPart()" type="$prefix:$inputParamType.getXmlType().getLocalPart()" />
+                 #else
+                   <element ref="$prefix:$inputParamType.getXmlName().getLocalPart()" />                 
+                 #end  
+                 #set ($i = $i + 1)
+            #end
+		    </sequence>
+			</complexType>
+		</element>
+			<element name="${OperationName}Response">
+			<complexType>
+				<sequence>
+                   #set($prefix=$hashMap.get($soajOperationDTO.getReturnType().getNamespaceURI()))
+                   #if ( $soajOperationDTO.getReturnTypeName() )
+                    <element  ref="$prefix:$soajOperationDTO.getReturnTypeName().getLocalPart()"/>
+                   #end
+				</sequence>
+			</complexType>
+			</element>
+
+	    #end
+		</xsd:schema>
+	</types>
+    #foreach($soajOperationDTO in $soajOperationDTOList)
+     #set ($OperationName= $soajOperationDTO.getOperationName())
+	<message name="request_${OperationName}">
+		<part name="parameters" element="tns:${OperationName}"/>
+	</message>
+	<message name="response_${OperationName}">
+		<part name="parameters" element="tns:${OperationName}Response"/>
+	</message>
+	#end
+	<portType name="${PortName}Type">
+	    #foreach($soajOperationDTO in $soajOperationDTOList)
+        #set ($OperationName= $soajOperationDTO.getOperationName())
+		<operation name="${OperationName}">
+			<input message="tns:request_${OperationName}"/>
+			<output message="tns:response_${OperationName}"/>
+		</operation>
+	    #end
+	</portType>
+	<binding name="${PortName}Binding" type="tns:${PortName}Type">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+		#foreach($soajOperationDTO in $soajOperationDTOList)
+        #set ($OperationName= $soajOperationDTO.getOperationName())
+		<operation name="${OperationName}">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		#end
+	</binding>
+
+	    #end
+	<service name="${ServiceName}">
+           #foreach($soajPortDTO in $soajPortDTOList)
+              #set ($PortName = $soajPortDTO.getPortName())
+		<port name="${PortName}" binding="tns:${PortName}Binding">
+			<soap:address location="$soajPortDTO.getEndpoint()" />
+		</port>
+           #end
+	</service>
+	#end
+</definitions>

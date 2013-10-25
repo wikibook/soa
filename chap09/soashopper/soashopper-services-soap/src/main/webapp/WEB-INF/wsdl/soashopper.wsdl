@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://soabook.com/soashopper"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:tns="http://soabook.com/soashopper"
+  xmlns:retail="http://www.example.com/retail"
+  xmlns:faults="http://www.example.com/faults">
+  <!--! <example xn="soashopper_wsdl"> -->
+  <!--! <c>chap09</c><s>wsdl</s> -->
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.example.com/faults">
+      <xs:include schemaLocation="http://soabook.com/example/faults/faults.xsd"
+      />
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified"
+      targetNamespace="http://soabook.com/soashopper">
+      <xs:import namespace="http://www.example.com/retail"
+        schemaLocation="http://soabook.com/example/retail/retail.xsd"/>
+      <xs:element name="offerSearch">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="keywords" type="xs:string"/>
+            <xs:element name="category" type="retail:CategoryType" 
+              minOccurs="0"/>
+            <xs:element name="lowprice" type="retail:PriceType" minOccurs="0"/>
+            <xs:element name="highprice" type="retail:PriceType" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="offerSearchReturn">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="retail:offer" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="offerSearchRequest">
+    <wsdl:part name="parameters" element="tns:offerSearch"/>
+  </wsdl:message>
+  <wsdl:message name="offerSearchResponse">
+    <wsdl:part name="parameters" element="tns:offerSearchReturn"/>
+  </wsdl:message>
+  <wsdl:message name="inputFault">
+    <wsdl:part name="parameters" element="faults:inputMessageValidationFault"/>
+  </wsdl:message>
+  <wsdl:portType name="ShopperPort">
+    <wsdl:operation name="offerSearch">
+      <wsdl:input message="tns:offerSearchRequest"/>
+      <wsdl:output message="tns:offerSearchResponse"/>
+      <wsdl:fault name="offerSearchInputFault" message="tns:inputFault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <!--! </example> -->
+  <wsdl:binding name="ShopperPortSOAPBinding" type="tns:ShopperPort">
+    <soap:binding style="document"
+      transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="offerSearch">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="offerSearchInputFault">
+        <soap:fault name="offerSearchInputFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ShopperPortService">
+    <wsdl:port name="ShopperPort" binding="tns:ShopperPortSOAPBinding">
+      <soap:address location="TBD"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

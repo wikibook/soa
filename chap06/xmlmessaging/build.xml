@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="chap06-xmlmessaging" basedir=".">
+  
+  <import file="${basedir}/../../common-build.xml"/>
+
+  <target name="run">
+    <java classname="samples.Client" fork="true">
+      <classpath>
+        <pathelement location="${basedir}/modules/client/target/chap06-xmlmessaging-client-1.0.jar"/>
+        <path refid="glassfish.webservices.path"/>
+      </classpath>
+      <arg value="${basedir}/etc/requestOrder.xml"/>
+      <arg value="${glassfish.host}"/>
+      <arg value="${glassfish.deploy.port}"/>
+    </java>
+  </target>
+
+</project>

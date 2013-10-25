@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://javector.com/soaj/config"
+  xmlns:cnf="http://javector.com/soaj/config"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="soajConfiguration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="cnf:soajWSDL" maxOccurs="unbounded"/>
+        <xs:element name="mappingXml" type="xs:string"/>
+        <xs:element ref="cnf:userDefinedSchemas" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="classpath" type="cnf:ClasspathType" minOccurs="0"
+          maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:key name="classpathKey">
+      <xs:selector xpath="cnf:classpath"/>
+      <xs:field xpath="@classpathId"/>
+    </xs:key>
+    <xs:keyref name="classpathRef" refer="cnf:classpathKey">
+      <xs:selector
+        xpath="cnf:soajWSDL/cnf:soajService/cnf:soajPort/cnf:soajOperation/cnf:soajPort/cnf:soajMethod/cnf:pojoReference"/>
+      <xs:field xpath="@classpath"/>
+    </xs:keyref>
+  </xs:element>
+  <xs:element name="userDefinedSchemas">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="cnf:userDefinedSchema" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="userDefinedSchema">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="targetNamespace" type="xs:string"/>
+        <xs:element name="schemaLocation" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="soajWSDL">
+    <xs:annotation>
+      <xs:documentation>The SOA-J representation of a WSDL document (i.e.,
+        wsdl:definitions) element. The components of the WSDL are constructed,
+        in the doc/lit/wrapped style from the underlying elements. For example,
+        the schemas in the types section are constructed by including all the
+        referenced XML elements in the parameter, return type, and exception
+        maps.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="includedSchema" type="xs:anyURI" minOccurs="0"
+          maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>A list of the URIs of the schemas that need to be
+              included in the WSDL definition in order to resolve the XML
+              element and type QNames referenced in the
+            mappins.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="cnf:soajService" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="wsdlName" type="xs:NCName"/>
+      <xs:attribute name="wsdlNamespace" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="soajService">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="cnf:soajPort" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="serviceName" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="soajPort">
+    <xs:annotation>
+      <xs:documentation>The SOA-J representation of a wsdl:port. It is built
+        from a collection of soajOperations which collectively represent a
+        wsdl:binding, together with a URI that represents the soap:address of
+        the wsdl:port.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="cnf:soajOperation" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="portName" type="xs:NCName"/>
+      <xs:attribute name="endpoint" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="soajOperation">
+    <xs:annotation>
+      <xs:documentation>The SOA-J representation of the mapping from a Java
+        method to a wsdl:operation. The ordering of the parameterMapping
+        elements corresponds one-to-one to the ordering of the paramClass
+        elements in the Java method. The nth parameterMapping is applied to the
+        nth paramClass. Note that this does not mean that the parameter class
+        and the mapping class must be the same. It only implies that the mapping
+        class can be safely cast to the parameter class during
+      invocation.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="cnf:soajMethod"/>
+        <xs:element name="parameterMapping" type="cnf:WSDL2JavaMappingType"
+          minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="returnMapping" type="cnf:WSDL2JavaMappingType"
+          minOccurs="0"/>
+        <xs:element name="exceptionMapping" type="cnf:WSDL2JavaMappingType"
+          minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="operationName" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <!-- Method Reference Elements -->
+  <xs:element name="soajMethod" type="cnf:JavaMethodType" abstract="true">
+    <xs:annotation>
+      <xs:documentation>The head element in a substitution group that defines
+        the SOA-J representations of a Java class and method to be deployed as a
+        Web service operation. Corresponds to java.lang.reflect.Method.
+        Implemented as either a POJO reference or an EJB
+      reference.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="soajPOJOMethod" type="cnf:POJOMethodType"
+    substitutionGroup="cnf:soajMethod"/>
+  <xs:element name="soajEJB30Method" type="cnf:EJB30MethodType"
+    substitutionGroup="cnf:soajMethod"/>
+  <xs:element name="soajEJB21Method" type="cnf:EJB21MethodType"
+    substitutionGroup="cnf:soajMethod"/>
+  <!-- Method Reference Types -->
+  <xs:complexType name="JavaMethodType" abstract="true">
+    <xs:annotation>
+      <xs:documentation>The top level abstract type that represents a
+        java.lang.method. Concrete types are derived by extension for POJO and
+        EJB.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="paramClass" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="javaMethod" type="xs:string" use="required"/>
+    <xs:attribute name="javaClass" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>A full qualified reference to a Java class or
+          interface. For a POJO, this is simply the class. For an EJB, it is the
+          remote or local business interface (EJB 3.0) or the remote or local
+          component interface (EJB 2.1).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="POJOMethodType">
+    <xs:complexContent>
+      <xs:extension base="cnf:JavaMethodType">
+        <xs:attribute name="classpath" type="xs:string" use="optional">
+          <xs:annotation>
+            <xs:documentation>A reference to a classpath that contains the class
+              definition as well as all dependent classes that are not available
+              to the current thread's classloader. When this attribute is
+              specified, SOA-J uses a custom classloader created from the
+              referenced classpath to instantiate the class. When this attribute
+              is omitted, SOA-J uses the current thread's
+            classloader.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EJB30MethodType">
+    <xs:complexContent>
+      <xs:extension base="cnf:JavaMethodType">
+        <xs:attribute name="jndiName" type="xs:string" use="optional">
+          <xs:annotation>
+            <xs:documentation>When the jndiName is not specified, the javaClass
+              attribute (required - see cnf:MethodType) is
+            used.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EJB21MethodType">
+    <xs:complexContent>
+      <xs:extension base="cnf:JavaMethodType">
+        <xs:attribute name="jndiName" type="xs:string" use="required"/>
+        <xs:attribute name="homeInterface" type="xs:string"/>
+        <xs:attribute name="isLocal" type="xs:boolean">
+          <xs:annotation>
+            <xs:documentation>When set to 'true' this attribute indicates that
+              the javaClass attribute (required - see cnf:MethodType) references
+              a local component interface. Otherwise, it is assumed that
+              javaClass represents a remote component
+            interface.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="WSDL2JavaMappingType">
+    <xs:annotation>
+      <xs:documentation>Represents a mapping between a Java class and an XML
+        element.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="javaClass" type="xs:string"/>
+      <xs:element name="xmlElement" type="cnf:XmlElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="XmlElementType">
+    <xs:annotation>
+      <xs:documentation>This type represents an XML element, represented either
+        as a ref or as a name/type pair.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="0">
+      <xs:element name="eltRef" type="xs:QName"/>
+      <xs:sequence>
+        <xs:element name="eltName" type="xs:QName"/>
+        <xs:element name="eltType" type="xs:QName"/>
+      </xs:sequence>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="ClasspathType">
+    <xs:sequence>
+      <xs:element name="jar" type="xs:anyURI" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="classpathId" type="xs:string"/>
+  </xs:complexType>
+</xs:schema>

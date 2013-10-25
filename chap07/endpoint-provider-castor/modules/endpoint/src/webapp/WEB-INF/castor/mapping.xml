@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN"
+                         "http://castor.org/mapping.dtd">
+<mapping xmlns:req="http://www.example.com/req"
+  xmlns:oms="http://www.example.com/oms">
+  
+  <class name="samples.MyOrderType">
+    <map-to xml="order" ns-uri="http://www.example.com/oms"/>
+    <field name="OrderKey" type="java.lang.String">
+      <bind-xml name="OrderKey" node="element"/>
+    </field>
+    <field name="OrderHeader" type="samples.MyHeader">
+      <bind-xml name="OrderHeader" node="element"></bind-xml>
+    </field>
+    <field name="item" type="samples.MyItem" collection="collection">
+      <bind-xml name="item" location="OrderItems" node="element"/>
+    </field>
+    <field name="OrderCcard" type="samples.MyCreditCard">
+      <bind-xml name="ccard" location="OrderCcard" node="element"/>
+    </field>
+    <field name="OrderText" type="java.lang.String">
+      <bind-xml name="OrderText" node="element"/>
+    </field>
+  </class>
+  <class name="samples.MyHeader">
+    <map-to xml="OrderHeader" ns-uri="http://www.example.com/oms"/>
+    <field name="salesorg" type="java.lang.String">
+      <bind-xml name="SALES_ORG" node="element"/>
+    </field>
+    <field name="purchdate" type="java.lang.String">
+      <bind-xml name="PURCH_DATE" node="element"/>
+    </field>
+    <field name="custno" type="java.lang.String">
+      <bind-xml name="CUST_NO" node="element"/>
+    </field>
+    <field name="pymtmeth" type="java.lang.String">
+      <bind-xml name="PYMT_METH" node="element"/>
+    </field>
+    <field name="purchordno" type="java.lang.String">
+      <bind-xml name="PURCH_ORD_NO" node="element"/>
+    </field>
+    <field name="wardeldate" type="java.lang.String">
+      <bind-xml name="WAR_DEL_DATE" node="element"/>
+    </field>
+  </class>
+  <class name="samples.MyRequestOrderResponse">
+    <map-to xml="requestOrderResponse" ns-uri="http://www.example.com/req"/>
+    <field name="order" type="samples.MyOrderType">
+      <bind-xml name="Order" node="element"/>
+    </field>
+  </class>
+  <class name="samples.MyRequestOrder">
+    <map-to xml="requestOrder" ns-uri="http://www.example.com/req"/>
+    <field name="custno" type="java.lang.String">
+      <bind-xml name="req:CUST_NO" node="element"/>
+    </field>
+    <field name="purchordno" type="java.lang.String">
+      <bind-xml name="req:PURCH_ORD_NO" node="element"/>
+    </field>
+    <field name="ccard" type="samples.MyCreditCard">
+      <bind-xml name="req:ccard" node="element"/>
+    </field>
+    <field name="itemList" type="samples.MyItem" collection="collection">
+      <bind-xml name="req:item"/>
+    </field>
+  </class>
+  <class name="samples.MyCreditCard">
+    <map-to xml="BUSOBJ_CCARD" ns-uri="http://www.example.com/oms"/>
+    <field name="type" type="java.lang.String" direct="true">
+      <bind-xml name="oms:CC_TYPE" node="element"/>
+    </field>
+    <field name="num" type="java.lang.String" direct="true">
+      <bind-xml name="oms:CC_NUMBER" node="element"/>
+    </field>
+    <field name="expireDate" type="java.lang.String" direct="true">
+      <bind-xml name="oms:CC_EXPIRE_DATE" node="element"/>
+    </field>
+    <field name="name" type="java.lang.String" direct="true">
+      <bind-xml name="oms:CC_NAME" node="element"/>
+    </field>
+    <field name="amount" type="float" direct="true">
+      <bind-xml name="oms:BILLAMOUNT" node="element"/>
+    </field>
+    <field name="chargeDate" type="java.lang.String" direct="true">
+      <bind-xml name="oms:CHARGE_DATE" node="element"/>
+    </field>
+  </class>
+  <class name="samples.MyItem">
+    <map-to xml="BUSOBJ_ITEM" ns-uri="http://www.example.com/oms"/>
+    <field name="itmnumber" type="java.lang.String" get-method="getITMNUMBER"
+    set-method="setITMNUMBER">
+      <bind-xml name="oms:ITM_NUMBER" node="element"/>
+    </field>
+    <field name="storageloc" type="java.lang.String" get-method="getSTORAGELOC"
+      set-method="setSTORAGELOC">
+      <bind-xml name="oms:STORAGE_LOC" node="element"/>
+    </field>
+    <field name="targetqty" type="double" get-method="getTARGETQTY"
+      set-method="setTARGETQTY">
+      <bind-xml name="oms:TARGET_QTY" node="element"/>
+    </field>
+    <field name="targetuom" type="java.lang.String" get-method="getTARGETUOM"
+      set-method="setTARGETUOM">
+      <bind-xml name="oms:TARGET_UOM" node="element"/>
+    </field>
+    <field name="priceperuom" type="java.math.BigDecimal"
+      get-method="getPRICEPERUOM" set-method="setPRICEPERUOM">
+      <bind-xml name="oms:PRICE_PER_UOM" node="element"/>
+    </field>
+    <field name="shorttext" type="java.lang.String" get-method="getSHORTTEXT"
+      set-method="setSHORTTEXT">
+      <bind-xml name="oms:SHORT_TEXT" node="element"/>
+    </field>
+  </class>
+</mapping>

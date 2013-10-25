@@ -1,0 +1,16 @@
+<classpath>
+  <classpathentry kind="src" path="src/main/java"/>
+  <classpathentry kind="src" path="src/main/resources"/>
+  <classpathentry kind="src" path="src/test/java" output="target/test-classes"/>
+  <classpathentry kind="src" path="src/test/resources" output="target/test-classes"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/soaj/eclipse/wst/org.apache.xerces_2.7.0.v200602052214.xml-apis/1.0.3/org.apache.xerces_2.7.0.v200602052214.xml-apis-1.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/soaj/eclipse/wst/org.wsdl4j_1.4.0.v200602131706.wsdl4j/1.0.3/org.wsdl4j_1.4.0.v200602131706.wsdl4j-1.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/soaj/eclipse/wst/org.apache.xerces_2.7.0.v200602052214.resolver/1.0.3/org.apache.xerces_2.7.0.v200602052214.resolver-1.0.3.jar"/>
+  <classpathentry kind="lib" path="C:/bin/glassfish-v2-b41/lib/javaee.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/soaj/eclipse/wst/org.apache.xerces_2.7.0.v200602052214.xercesImpl/1.0.3/org.apache.xerces_2.7.0.v200602052214.xercesImpl-1.0.3.jar"/>
+  <classpathentry kind="lib" path="C:/bin/glassfish-v2-b41/lib/webservices-rt.jar"/>
+  <classpathentry kind="var" path="M2_REPO/soaj/eclipse/wst/org.eclipse.wst.wsdl.validation_1.0.1.v200603152158/1.0.3/org.eclipse.wst.wsdl.validation_1.0.1.v200603152158-1.0.3.jar"/>
+</classpath>

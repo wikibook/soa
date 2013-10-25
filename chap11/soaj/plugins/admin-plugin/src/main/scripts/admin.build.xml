@@ -1,0 +1,47 @@
+<project>
+  
+  <condition property="ASADMIN" value="asadmin.bat" else="asadmin">
+    <os family="windows"/>
+  </condition>
+
+  <target name="deploy">
+    <echo message="deploying ${artifact}"/>
+    <exec executable="${glassfish.home}/bin/${ASADMIN}" failonerror="true">
+      <arg value="deploy"/>
+      <arg line="--host ${host}"/>
+      <arg line="--port ${port}"/>
+      <arg line="--user ${user}"/>
+      <arg line="--passwordfile ${passfile}"/>
+      <arg value="${artifact}"/>
+    </exec>
+  </target>
+
+  <target name="undeploy">
+    <exec executable="${glassfish.home}/bin/${ASADMIN}" failonerror="true">
+      <arg value="undeploy"/>
+      <arg line="--host ${host}"/>
+      <arg line="--port ${port}"/>
+      <arg line="--user ${user}"/>
+      <arg line="--passwordfile ${passfile}"/>
+      <arg value="${module}"/>
+    </exec>
+  </target>
+
+  <target name="start-glassfish">
+    <exec executable="${glassfish.home}/bin/${ASADMIN}"  spawn="true" failonerror="false">
+      <arg value="start-domain"/>
+      <arg line="--user ${user}"/>
+      <arg line="--passwordfile ${passfile}"/>
+      <arg value="${domain}"/>
+    </exec>
+    <sleep seconds="30"/>
+    <echo message="glassfish started"/>
+  </target>
+
+  <target name="stop-glassfish">
+    <exec executable="${glassfish.home}/bin/${ASADMIN}" failonerror="false">
+      <arg line="stop-domain ${domain}"/>
+    </exec>
+  </target>
+
+</project>

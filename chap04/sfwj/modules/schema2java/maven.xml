@@ -1,0 +1,16 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  
+  <goal name="build" prereqs="clean, jar:install"/>
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-glassfish-to-classpath"/>
+    <attainGoal name="gen-java"/>
+  </preGoal>
+  <goal name="gen-java"  prereqs="book:setenv">
+    <exec executable="${glassfish.appsrvr}/bin/${xjc}">
+      <arg value="-d"/>
+      <arg value="${basedir}/src/java"/>
+      <arg value="http://soabook.com/example/corp/standardtypes.xsd"/>
+    </exec>
+  </goal>
+
+</project>

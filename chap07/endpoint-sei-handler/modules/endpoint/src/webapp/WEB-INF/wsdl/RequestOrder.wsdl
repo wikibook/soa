@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://www.example.com/req"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:oms="http://www.example.com/oms" xmlns:req="http://www.example.com/req"
+  xmlns:faults="http://www.example.com/faults">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.example.com/oms">
+      <xs:include schemaLocation="http://soabook.com/example/oms/orders.xsd"/>
+    </xs:schema>
+    <xs:schema targetNamespace="http://www.example.com/faults">
+      <xs:include schemaLocation="http://soabook.com/example/faults/faults.xsd"
+      />
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified"
+      targetNamespace="http://www.example.com/req">
+      <xs:import namespace="http://www.example.com/oms"/>
+      <xs:element name="requestOrder">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="CUST_NO">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:maxLength value="10"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="PURCH_ORD_NO" minOccurs="0">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:maxLength value="35"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="ccard" type="oms:BUSOBJ_CCARD" minOccurs="0"/>
+            <xs:element name="item" type="oms:BUSOBJ_ITEM" 
+            maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="requestOrderResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="oms:Order"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="request">
+    <wsdl:part name="parameters" element="req:requestOrder"/>
+  </wsdl:message>
+  <wsdl:message name="response">
+    <wsdl:part name="parameters" element="req:requestOrderResponse"/>
+  </wsdl:message>
+  <wsdl:message name="inputFault">
+    <wsdl:part name="parameters" element="faults:inputMessageValidationFault"/>
+  </wsdl:message>
+  <wsdl:portType name="RequestOrderPort">
+    <wsdl:operation name="requestOrder">
+      <wsdl:input message="req:request"/>
+      <wsdl:output message="req:response"/>
+      <wsdl:fault name="requestOrderInputFault" message="req:inputFault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RequestOrderSOAPBinding" type="req:RequestOrderPort">
+    <soap:binding style="document"
+      transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="requestOrder">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="requestOrderInputFault">
+        <soap:fault name="requestOrderInputFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RequestOrderService">
+    <wsdl:port name="RequestOrderPort" binding="req:RequestOrderSOAPBinding">
+      <soap:address location="http://localhost:8080/oms/RequestOrder"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

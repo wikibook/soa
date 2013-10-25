@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:j2ee="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+  <!-- per JSR-109, servlet-name must equalt fully qualified name of class -->
+  <servlet>
+    <servlet-name>com.javector.soaj.provider.SoajProvider</servlet-name>
+    <servlet-class>com.javector.soaj.provider.SoajProvider</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>com.javector.soaj.provider.SoajProvider</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
+  <!-- uncomment to enable http request logging on server.log
+  <filter>
+    <filter-name>httplogger</filter-name>
+    <filter-class>com.javector.soaj.util.http.HttpRequestLoggingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>httplogger</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  -->
+
+</web-app>

@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:ns1="http://www.example.com/req" xmlns:ns2="http://www.example.com/oms"
+  xmlns:ns3="http://www.example.com/faults">
+  <soapenv:Body>
+    <soapenv:Fault xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+      <faultcode>soapenv:Server</faultcode>
+      <faultstring>Input parameter failed validation.</faultstring>
+      <detail>
+        <ns3:inputMessageValidationFault msg="Customer Number cannot be null."/>
+      </detail>
+    </soapenv:Fault>
+  </soapenv:Body>
+</soapenv:Envelope>

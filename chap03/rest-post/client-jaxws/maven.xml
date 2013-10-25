@@ -1,0 +1,48 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  
+  <goal name="build" prereqs="clean, jar"/>
+  
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-glassfish-to-classpath"/>
+  </preGoal>
+  
+  <!-- RUN: invoke the Servlet Version RESTful service to post a cust history -->
+  <target name="run-servlet">
+    <mkdir dir="${user.home}/tmp"/>
+    <delete quiet="true">
+     <fileset dir="${user.home}/tmp" includes="soabook*.xml"/>
+    </delete>
+    <attainGoal name="book:setenv"/>
+    <java classname="samples.PostCustomerHistory"
+      failonerror="true">
+      <arg value="${basedir}/etc/custhistentry.xml"/>
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/rest-post-servlet/CustomerHistory?SourceSystem=OMS"/>
+      <classpath>
+        <path refid="glassfish.classpath"/>
+        <path refid="maven.dependency.classpath"/>
+        <fileset dir="${maven.build.dir}">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+  </target>
+  
+  <target name="post-test">
+    <attainGoal name="book:setenv"/>
+    <java classname="samples.PostTester"
+      failonerror="true">
+      <arg value="${basedir}/etc/custhistentry.xml"/>
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/rest-post-servlet/CustomerHistory?SourceSystem=OMSS"/>
+      <classpath>
+        <path refid="glassfish.classpath"/>
+        <path refid="maven.dependency.classpath"/>
+        <fileset dir="${maven.build.dir}">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+  </target>
+
+</project>

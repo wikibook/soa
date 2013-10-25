@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="ElementNameAndTypeConfig"
+  targetNamespace="http://javector.com/soaj/test/wsdlgen/elementNameAndType"
+  xmlns:tns="http://javector.com/soaj/test/wsdlgen/elementNameAndType"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:po="http://javector.com/ser/adaptive/po"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xsd:schema targetNamespace="http://javector.com/ser/adaptive/po">
+      <xsd:include schemaLocation="purchaseOrder.xsd"/>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+      targetNamespace="http://javector.com/soaj/test/wsdlgen/elementNameAndType"
+      elementFormDefault="qualified">
+      <xsd:import namespace="http://javector.com/ser/adaptive/po"/>
+      <element name="createPO">
+        <complexType>
+          <sequence>
+            <element ref="po:items"/>
+            <element name="billingAddr" type="po:BillToType"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="createPOResponse">
+        <complexType>
+          <sequence>
+            <element ref="po:purchaseOrder"/>
+          </sequence>
+        </complexType>
+      </element>
+    </xsd:schema>
+  </types>
+  <message name="request_createPO">
+    <part name="parameters" element="tns:createPO"/>
+  </message>
+  <message name="response_createPO">
+    <part name="parameters" element="tns:createPOResponse"/>
+  </message>
+  <portType name="CreatePOPortType">
+    <operation name="createPO">
+      <input message="tns:request_createPO"/>
+      <output message="tns:response_createPO"/>
+    </operation>
+  </portType>
+  <binding name="CreatePOPortBinding" type="tns:CreatePOPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+      style="document"/>
+    <operation name="createPO">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="CreatePOService">
+    <port name="CreatePOPort" binding="tns:CreatePOPortBinding">
+      <soap:address
+        location="http://localhost:8080/soaj/wsdlgenTest/elementNameAndType"/>
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://www.example.com/oms/getorders"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:oms="http://www.example.com/oms"
+  xmlns:getord="http://www.example.com/oms/getorders"
+  xmlns:faults="http://www.example.com/faults">
+  <!--! <example xn="RPC_LIT_TYPES_MESSAGES"> -->
+  <!--! <c>chap04</c><s>dispatch</s> -->
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified"
+      targetNamespace="http://www.example.com/getord">
+      <xs:import schemaLocation="http://www.example.com/oms
+        http://soabook.com/example/oms/orders.xsd"/>
+      <xs:import schemaLocation="http://www.example.com/faults
+        http://soabook.com/example/faults/faults.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="request">
+    <wsdl:part name="startDate" type="xs:date"/>
+    <wsdl:part name="endDate" type="xs:date"/>
+  </wsdl:message>
+  <wsdl:message name="response">
+    <wsdl:part name="orders" element="oms:getOrdersType"/>
+  </wsdl:message>
+  <!--! </example> -->
+  <wsdl:message name="inputFault">
+    <wsdl:part name="parameters" element="faults:inputMessageValidationFault"/>
+  </wsdl:message>
+  <wsdl:portType name="GetOrdersDatesPort">
+    <wsdl:operation name="getOrdersDates">
+      <wsdl:input message="getord:request"/>
+      <wsdl:output message="getord:response"/>
+      <wsdl:fault name="getOrdersInputFault" message="getord:inputFault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GetOrdersDatesSOAPBinding"
+    type="getord:GetOrdersDatesPort">
+    <soap:binding style="rpc"
+      transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getOrdersDates">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="getOrdersInputFault">
+        <soap:fault name="getOrdersInputFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GetOrdersDatesService">
+    <wsdl:port name="GetOrdersDatesPort" binding="GetOrdersDatesSOAPBinding">
+      <soap:address location="http://localhost:8080/getorders/getordersdates"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

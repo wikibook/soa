@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://javector.com/ser/adaptive/comp" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:test="http://javector.com/ser/adaptive/comp" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="company">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string"/>
+				<xs:element name="address" type="xs:string"/>
+				<xs:element name="employees" type="test:Employee"/>
+				<xs:element name="departments" type="test:Department"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="Employee">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="Id" type="xs:positiveInteger"/>
+			<xs:element name="address" type="xs:string"/>
+			<xs:element name="depId" type="xs:positiveInteger"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Department">
+		<xs:sequence>
+			<xs:element name="id" type="xs:positiveInteger"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="modules" type="test:Module"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Module">		
+			<xs:sequence>
+				<xs:element name="id" type="xs:positiveInteger"/>
+				<xs:element name="name" type="xs:string"/>
+				<xs:element name="function" type="xs:string"/>
+			</xs:sequence>		
+	</xs:complexType>
+</xs:schema>

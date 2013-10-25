@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title></title>
+<link rel=stylesheet type="text/css" href="table-style.css" />
+<script type="text/javascript">
+		var djConfig = {
+			isDebug: true
+			,debugAtAllCosts: true
+		};
+	</script>
+<script type="text/javascript" src="scripts/dojo.js"></script>
+<script type="text/javascript">
+  dojo.require("dojo.widget.FilteringTable");
+  dojo.hostenv.writeIncludes();
+
+  var theSOAShopperTestData=[];
+  var names=["KINGSTON - KTL-TP667/2G - 2GB DDR2 667MHZ SODIMM-<b>LENOVO</b> TP R60 <b>T60</b> X60 Z61","2GB DDR2 667MHZ SODIMM-<b>LENOVO</b> TP R60 <b>T60</b> X60 Z61","Kingston - Memory - 2 GB - SO DIMM 200-pin - DDR II - 667 MHz - unbuffered - KTL-TP667/2G","Kingston - Memory - 2 GB - SO DIMM 200-pin - DDR II - 533 MHz / PC2-4200 - KTM-TP3840/2G","2GB IBM ThinkPad DDR2-5300 DDR2-667 SODIMM (p/n 73P3847)"];
+  var thumbnails=["<img src='http://f5c.yahoofs.com/shopping/mcid17_231466/simg_t_td15402i508338jpg70?rm_____D_CRpD_o2'/>","<img src='http://f5c.yahoofs.com/shopping/mcid9_166394/simg_t_t1169854pc1169854jpg70?rm_____D3j2ajgLB'/>","<img src='http://f5c.yahoofs.com/shopping/mcid16_69788/simg_t_t261056ei508338jpg70?rm_____DCvn4yCkU'/>","<img src='http://f5c.yahoofs.com/shopping/mcid6_93904/simg_t_t273309di436768jpg70?rm_____DvbcQ10RS'/>","<img src='http://f5c.yahoofs.com/shopping/mcid6_76234/simg_t_t73p3847memx_1920_27303238570?rm_____D.ykQyNab'/>"];
+  var merchants=["TECHONWEB","Page Computer","Colamco","Colamco","MemoryTen"];
+  var prices=["638.87","643.95","684.86","606.98","698.98"];
+  var urls=["<a href='http://www.techonweb.com/products/productdetail.aspx?id=D15402&src=YH'>link</a>","<a href='http://store.pagecomputers.com/store/productlink.asp?product_id=1169854&scs=YAHOO&t=0520'>link</a>","<a href='http://www.colamco.com/store/product/detail.aspx?product=582222&Source=Yahoo'>link</a>","<a href='http://www.colamco.com/store/product/detail.aspx?product=575032&Source=Yahoo'>link</a>","<a href='http://shop.store.yahoo.com/cgi-bin/clink?memx+shopping:dmps/.26..26.pfrom.3d.600.2e.00.5f.800.2e.00.26.s.3d..26.r.3d..26.top.3d..26.ui.3d..26.query.3d.lenovo_t60/ctx=mid:1007011,pid:73p3847,pdid:57,pos:5,spc:14489115,date:20070108,srch:kw,x:+73p3847.html'>link</a>"];
+  for (var i=0; i<names.length; i++) {
+    var o = {
+   	Id:i,
+	source:"Yahoo Shopping",
+   	thumbnail:thumbnails[i],
+   	price:"USD "+prices[i],
+   	summary:names[i],
+   	url:urls[i]
+      };
+      theSOAShopperTestData.push(o);
+  }
+
+  function populateTableFromTestSOAShopperData() {
+    var w = dojo.widget.byId("fromSOAShopperData");
+    if(w.store.get().length > 0){
+      alert("you already loaded SOAShopper data :)");
+      return;
+    }
+    w.store.setData(theSOAShopperTestData);
+  }
+		
+</script>
+<script type="text/javascript">
+  
+  //! <example xn="search_doSearch">
+  //! <c>chap10</c><s>samplecode</s>
+  function doSearch() {
+    var searchEndpoint = "/soashopper/rest/shopper";
+    var keywordsVal = document.getElementById("keywordsId").value;
+    var categoryVal = document.getElementById("categoryId").value;
+    var lowpriceVal = document.getElementById("lowpriceId").value;
+    var highpriceVal = document.getElementById("highpriceId").value;
+    var alertStr = keywordsVal + " " + categoryVal + " " + lowpriceVal 
+      + " " + highpriceVal;
+    if (!keywordsVal) {
+      alert("keywords may not be empty.");
+      return;
+    }
+    searchEndpoint += "?keywords="+keywordsVal.replace(/ /g,"%20");
+    if (categoryVal) {
+      searchEndpoint += "&category="+categoryVal;
+    }
+    if (lowpriceVal || highpriceVal) {
+      searchEndpoint += "&currencyId=USD";
+    }
+    if (lowpriceVal) {
+      searchEndpoint += "&lowprice="+lowpriceVal;
+    }
+    if (highpriceVal) {
+      searchEndpoint += "&highprice="+highpriceVal;
+    }
+    retrieveURL(searchEndpoint);
+  }
+  //! </example>
+
+  //! <example xn="search_showSearchingMessage">
+  //! <c>chap10</c><s>samplecode</s>
+  function showSearchingMsg(url) {
+    var messageTDElt = document.getElementById('searchingMessageId');
+    var loadingTDElt = document.getElementById('loadingId');
+    loadingTDElt.setAttribute('width','50');
+    var loadingNode = document.createElement('img');
+    loadingNode.setAttribute('src','images/bigrotation2.gif');
+    loadingNode.setAttribute('style', 'margin-right: 6px; margin-top: 5px;'); 
+    var existingLoadingNode = loadingTDElt.firstChild;
+    if (existingLoadingNode) {
+      loadingTDElt.removeChild(existingLoadingNode);
+    }
+    loadingTDElt.appendChild(loadingNode);
+    var msg = "Invoking RESTful search at URL: " + url;
+    var msgNode = document.createTextNode(msg);
+    var existingMsg = messageTDElt.firstChild
+    if (existingMsg) {
+      messageTDElt.removeChild(existingMsg);
+    }
+    messageTDElt.appendChild(msgNode);
+  }
+  //! </example>
+  
+  function showFinishedMsg(url) {
+    var messageTDElt = document.getElementById('searchingMessageId');
+    var loadingTDElt = document.getElementById('loadingId');
+    var existingLoadingNode = loadingTDElt.firstChild;
+    if (existingLoadingNode) {
+      loadingTDElt.removeChild(existingLoadingNode);
+    }
+    var loadingTDElt = document.getElementById('loadingId');
+    loadingTDElt.setAttribute('width','10');
+    var msg = "Completed RESTful search at URL: " + url;
+    var msgNode = document.createTextNode(msg);
+    var existingMsg = messageTDElt.firstChild
+    if (existingMsg) {
+      messageTDElt.removeChild(existingMsg);
+    }
+    messageTDElt.appendChild(msgNode);
+  }
+  
+  var req;
+  var restURL;
+  //! <example xn="search_retrieveURL">
+  //! <c>chap10</c><s>samplecode</s>
+  function retrieveURL(url) {
+    restURL = url;
+    showSearchingMsg(restURL);
+    if (window.XMLHttpRequest) { // Non-IE browsers
+      req = new XMLHttpRequest();
+      req.onreadystatechange = processStateChange;
+      try {
+        req.open("GET", url, true);
+        req.setRequestHeader('Content-type','text/xml');
+      } catch (e) {
+        alert(e);
+      }
+      req.send(null);
+    } else if (window.ActiveXObject) { // IE
+      req = new ActiveXObject("Microsoft.XMLHTTP");
+      if (req) {
+        req.onreadystatechange = processStateChange;
+        try {
+          req.open("GET", url, true);
+          req.setRequestHeader('Content-type','text/xml');
+        } catch (e) {
+          alert(e);
+        }
+        req.send();
+      }
+    }
+  }
+  //! </example>
+
+  //! <example xn="search_processStateChange">
+  //! <c>chap10</c><s>samplecode</s>
+  function processStateChange() {
+    if (req.readyState == 4) { // Complete
+      showFinishedMsg(restURL);
+      if (req.status == 200) { // OK response
+        processXML(req.responseXML);
+      } else {
+        alert("Problem invoking REST endpoint: " + restURL + " : " 
+          + req.status + " " + req.statusText);
+      }
+    }
+  }
+  //! </example>
+
+  var theSOAShopperLiveData=[];
+
+  //! <example xn="search_processXML">
+  //! <c>chap10</c><s>samplecode</s>
+    function processXML(searchDoc) {
+    try {
+    var listOffers = searchDoc.getElementsByTagName('offer');
+    for (var i=0; i<listOffers.length; i++) {
+      var item = listOffers.item(i);
+      var sourceStr = 
+        item.getElementsByTagName('source').item(0).firstChild.data;
+      var thumbnailElts = item.getElementsByTagName('thumbnail');
+      var thumbnailElt;
+      var thumbnailUrl = "";
+      var thumbnailHtml = "";
+      if (thumbnailElts && thumbnailElts.item(0)) {
+        thumbnailElt = thumbnailElts.item(0);
+        thumbnailUrl = 
+          thumbnailElt.getElementsByTagName('url').item(0).firstChild.data;
+        thumbnailHtml = "<img src='"+thumbnailUrl+"'";
+        var h = thumbnailElt.getElementsByTagName('pixelHeight');
+        if (h && h.item(0)) {
+          thumbnailHtml += " height='"+h.item(0).firstChild.data+"'";
+        }
+        var w = thumbnailElt.getElementsByTagName('pixelWidth');
+        if (w && w.item(0)) {
+          thumbnailHtml += " width='"+w.item(0).firstChild.data+"'";
+        }
+        thumbnailHtml += "/>";
+      }
+    //! </example>
+      var priceElt = item.getElementsByTagName('price');
+      var priceStr = "";
+      if (priceElt) {
+        var priceNode = priceElt.item(0).firstChild;
+	      if (priceNode) {
+          var priceVal = Node.data;
+	      }
+        var currencyId = priceElt.item(0).getAttribute('currencyId');
+        priceStr = currencyId + " " + priceVal;
+      }
+      var summaryStr = item.getElementsByTagName('summary').item(0).firstChild.data;
+      var urlStr = item.getElementsByTagName('offerUrl').item(0).firstChild.data;
+      var urlHtml = "<a href='"+urlStr+"'>link</a>";
+      //! <example xn="search_JSON">
+      //! <c>chap10</c><s>samplecode</s>
+      var jsonData = {
+        Id:i,
+        source:sourceStr,
+        thumbnail:thumbnailHtml,
+        price:priceStr,
+        summary:summaryStr,
+        url:urlHtml
+      };
+      theSOAShopperLiveData.push(jsonData);
+    } // end for
+    populateTableFromLiveSOAShopperData();
+     //! </example>
+  } catch(e) {
+    alert(e);
+  }
+  }
+
+  //! <example xn="search_populateTableFromLiveSOAShopperData">
+  //! <c>chap10</c><s>samplecode</s>
+  function populateTableFromLiveSOAShopperData() {
+  try {
+    var w = dojo.widget.byId("fromSOAShopperData");
+    if(w.store.get().length > 0){
+      alert("you already loaded SOAShopper data :)");
+      return;
+    }
+    w.store.setData(theSOAShopperLiveData);
+  } catch(e) {
+    alert(e);
+  }
+  }
+  //! </example>
+
+</script>
+</head>
+<body onLoad="">
+<h1>SOAShopper Search</h1>
+<h3>Enter search criteria to find offers from eBay, Yahoo Shopping, and Amazon</h3>
+<br />
+<p>
+<!--! <example xn="search_inputtable"> -->
+<!--! <c>chap10</c><s>samplecode</s> -->
+<table class="plain">
+  <tr class="plain">
+    <td width="150" class="plain">keywords:</td>
+    <td class="plain"><input type="text" id="keywordsId" size="50" /></td>
+  </tr>
+  <tr class="plain">
+    <td class="plain">category:</td>
+    <td class="plain"><select id="categoryId" size="1">
+      <option value="COMPUTERS">COMPUTERS</option>
+      <option value="CELLPHONES">CELLPHONES</option>
+      <option value="MOVIES">MOVIES</option>
+    </select></td>
+  </tr>
+  <tr class="plain">
+    <td class="plain">lowprice (USD):</td>
+    <td class="plain"><input type="text" id="lowpriceId" size="15" /></td>
+  </tr>
+  <tr class="plain">
+    <td class="plain">highprice (USD):</td>
+    <td class="plain"><input type="text" id="highpriceId" size="15" /></td>
+  </tr>
+  <tr class="plain">
+    <td colspan="2" class="plain"><input type="button"
+      value="Search" onclick="doSearch();" /></td>
+  </tr>  
+</table>
+<!--! </example> -->
+<p/>
+<table class="plain">
+  <tr class="plain">
+    <td class="plain" id="loadingId" width="50"></td>
+    <td class="plain" id="searchingMessageId"></td>
+  </tr>
+  <tr><td colspan="2" class="plain"><br/><i style="{font-size:0.85em;}">
+    The table columns are sortable.  
+    Try clicking on the column headers.  
+    This is a Dojo FilteredTable Widget.</i></td>
+  </tr>
+</table>
+</p>
+<p/>
+<!--! <example xn="search_dojotable"> --> 
+<!--! <c>chap10</c><s>samplecode</s> -->
+<table dojoType="filteringTable" id="fromSOAShopperData" multiple="true"
+  alternateRows="true" cellpadding="0" cellspacing="0" border="0"
+  style="margin-bottom:24px;">
+  <thead>
+    <tr>
+      <th field="source" dataType="String">Source</th>
+      <th field="thumbnail" dataType="html" align="center">Image</th>
+      <th field="price" dataType="String">Price</th>
+      <th field="summary" dataType="String">Summary</th>
+      <th field="url" dataType="html">Link</th>
+    </tr>
+  </thead>
+</table>
+<!--! </example> -->
+<p/>
+<hr/>
+<br/>
+<i>To test the table widget without doing a search -></i><input type="button" value="Test Table"
+  onclick="populateTableFromTestSOAShopperData();" style="{font-size:0.5em;}"/>
+
+</body>
+</html>

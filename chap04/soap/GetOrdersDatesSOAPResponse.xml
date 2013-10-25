@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="SOAP_RESPONSE"> -->
+<!--! <c>chap04</c><s>soap</s> -->
+<env1:Envelope xmlns:env1="http://schemas.xmlsoap.org/soap/envelope">
+  <env1:Body>
+    <getord:getOrdersDatesResponse
+      xmlns:getord="http://www.example.com/oms/getorders">
+      <Orders xmlns="http://www.example.com/oms"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.example.com/oms
+        http://soabook.com/example/oms/orders.xsd">
+        <Order>
+          <OrderKey>ENT1234567</OrderKey>
+          <OrderHeader>
+            <SALES_ORG>NE</SALES_ORG>
+            <PURCH_DATE>2005-11-20</PURCH_DATE>
+            <CUST_NO>ENT0072123</CUST_NO>
+            <PYMT_METH>PO</PYMT_METH>
+            <PURCH_ORD_NO>PO-72123-0007</PURCH_ORD_NO>
+            <WAR_DEL_DATE>2006-12-20</WAR_DEL_DATE>
+          </OrderHeader>
+          <!--! </example> -->
+          <OrderItems>
+            <item>
+              <ITM_NUMBER>012345</ITM_NUMBER>
+              <STORAGE_LOC>NE02</STORAGE_LOC>
+              <TARGET_QTY>50</TARGET_QTY>
+              <TARGET_UOM>CNT</TARGET_UOM>
+              <PRICE_PER_UOM>7.95</PRICE_PER_UOM>
+              <SHORT_TEXT>7 mm Teflon Gasket</SHORT_TEXT>
+            </item>
+            <item>
+              <ITM_NUMBER>543210</ITM_NUMBER>
+              <TARGET_QTY>5</TARGET_QTY>
+              <TARGET_UOM>KG</TARGET_UOM>
+              <PRICE_PER_UOM>12.58</PRICE_PER_UOM>
+              <SHORT_TEXT>Lithium grease with PTFE/Teflon</SHORT_TEXT>
+            </item>
+          </OrderItems>
+          <OrderText>This order is a rush.</OrderText>
+        </Order>
+        <Order>
+          <OrderKey>ENT1234568</OrderKey>
+          <OrderHeader>
+            <SALES_ORG>NE</SALES_ORG>
+            <PURCH_DATE>2005-11-21</PURCH_DATE>
+            <CUST_NO>ENT0098211</CUST_NO>
+            <PYMT_METH>PO</PYMT_METH>
+            <PURCH_ORD_NO>PO-98211-00147</PURCH_ORD_NO>
+            <WAR_DEL_DATE>2006-11-21</WAR_DEL_DATE>
+          </OrderHeader>
+          <OrderItems>
+            <item>
+              <ITM_NUMBER>087321</ITM_NUMBER>
+              <STORAGE_LOC>NE05</STORAGE_LOC>
+              <TARGET_QTY>2</TARGET_QTY>
+              <TARGET_UOM>CNT</TARGET_UOM>
+              <PRICE_PER_UOM>598.49</PRICE_PER_UOM>
+              <SHORT_TEXT>Acme Air Handler</SHORT_TEXT>
+            </item>
+          </OrderItems>
+        </Order>
+      </Orders>
+    </getord:getOrdersDatesResponse>
+  </env1:Body>
+</env1:Envelope>

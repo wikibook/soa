@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+  http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>soabook</groupId>
+  <artifactId>chap07</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0</version>
+  <name>CHAP07</name>
+  <parent>
+    <groupId>soabook</groupId>
+    <artifactId>soabook</artifactId>
+    <version>1.0</version>
+  </parent>
+  <modules>
+    <module>endpoint-sei</module>
+    <module>endpoint-provider</module>
+    <module>endpoint-provider-castor</module>
+    <module>endpoint-sei-handler</module>
+    <module>endpoint-endpoint</module>
+  </modules>
+</project>

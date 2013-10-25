@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="chap06-asynchronous-wsdl2java" basedir=".">
+  
+  <import file="${basedir}/../../../../common-build.xml"/>
+
+  <target name="wsdl2java" depends="process-binding-customizations">
+    <mkdir dir="${basedir}/target/work/java"/>
+    <mkdir dir="${basedir}/target/classes"/>
+    <exec executable="${wsimport}" failonerror="true">
+      <arg value="-b"/>
+      <arg value="${basedir}/target/work/etc/async-binding-customizations.xml"/>
+      <arg value="-d"/>
+      <arg value="${basedir}/target/classes"/>
+      <arg value="-s"/>
+      <arg value="${basedir}/target/work/java"/>
+      <arg value="-keep"/>
+      <arg value="http://${glassfish.host}:${glassfish.deploy.port}/chap06-endpoint-endpoint-1.0/requestOrder?wsdl"/>
+    </exec>
+  </target>
+
+  <target name="process-binding-customizations">
+    <mkdir dir="${basedir}/target/work/etc"/>
+    <copy file="${basedir}/etc/async-binding-customizations.xml"
+      todir="${basedir}/target/work/etc">
+      <filterset begintoken="l" endtoken="0">
+        <filter token="ocalhost:808" value="${glassfish.host}:${glassfish.deploy.port}"/>
+      </filterset>
+    </copy>
+  </target>
+  
+</project>

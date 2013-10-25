@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cnf:soajConfiguration xmlns:cnf="http://javector.com/soaj/config"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://javector.com/soaj/config file:/home/devglassfish/soaj/soaj_root/soajws/provider/src/main/resources/config/soaj-config.xsd">
+  <cnf:soajWSDL wsdlName="test" wsdlNamespace="http://test">
+    <cnf:soajService serviceName="TestService">
+      <cnf:soajPort portName="TestPort" endpoint="http://localhost:8080/bogus">
+        <cnf:soajOperation operationName="pojoTest">
+          <cnf:soajPOJOMethod javaMethod="sayHello" javaClass="test.Hello">
+            <cnf:paramClass>java.lang.String</cnf:paramClass>
+          </cnf:soajPOJOMethod>
+          <cnf:returnMapping>
+            <cnf:javaClass>java.lang.String</cnf:javaClass>
+            <cnf:xmlElement>
+              <cnf:eltName>sayHelloReturn</cnf:eltName>
+              <cnf:eltType>xs:string</cnf:eltType>
+            </cnf:xmlElement>
+          </cnf:returnMapping>
+        </cnf:soajOperation>
+      </cnf:soajPort>
+    </cnf:soajService>
+  </cnf:soajWSDL>
+</cnf:soajConfiguration>

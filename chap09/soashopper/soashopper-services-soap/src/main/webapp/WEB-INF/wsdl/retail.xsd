@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://www.example.com/retail"
+  xmlns:tns="http://www.example.com/retail">
+  <!--! <example xn="OfferType"> -->
+  <!--! <c>chap09</c><s>rest</s> -->
+  <xs:element name="offerList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tns:offer" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="offer" type="tns:OfferType"/>
+
+  <xs:complexType name="OfferType">
+    <xs:sequence>
+      <xs:element name="offerId" type="xs:string" nillable="true"/>
+      <xs:element name="productId" type="xs:string" minOccurs="0"/>
+      <xs:element name="source" type="tns:SourceType"/>
+      <xs:element name="thumbnail" type="tns:PictureType" minOccurs="0"/>
+      <xs:element name="price" type="tns:PriceType"/>
+      <xs:element name="merchantName" type="xs:string" minOccurs="0"/>
+      <xs:element name="summary" type="xs:string"/>
+      <xs:element name="offerUrl" type="xs:anyURI"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!--! </example> -->
+  
+  <xs:simpleType name="SourceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="eBay"/>
+      <xs:enumeration value="Yahoo Shopping"/>
+      <xs:enumeration value="Amazon"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="PictureType">
+    <xs:sequence>
+      <xs:element name="url" type="xs:anyURI"/>
+      <xs:element name="pixelWidth" type="xs:nonNegativeInteger" minOccurs="0"/>
+      <xs:element name="pixelHeight" type="xs:nonNegativeInteger" minOccurs="0"
+      />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!--! <example xn="PriceType"> -->  
+  <!--! <c>chap09</c><s>wsdl</s> -->
+  <xs:complexType name="PriceType">
+    <xs:simpleContent>
+      <xs:extension base="tns:HundrethsType">
+        <xs:attribute name="currencyId" type="tns:CurrencyType"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <xs:simpleType name="HundrethsType">
+    <xs:restriction base="xs:decimal">
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CurrencyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="USD"/>
+      <xs:enumeration value="GBP"/>
+      <xs:enumeration value="EUR"/>
+      <xs:enumeration value="JPY"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--! </example> -->
+  <!--! <example xn="CategoryType"> -->
+  <!--! <c>chap09</c><s>wsdl</s> -->
+  <xs:simpleType name="CategoryType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="COMPUTERS"/>
+      <xs:enumeration value="CELLPHONES"/>
+      <xs:enumeration value="MOVIES"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--! </example> -->
+  
+</xs:schema>

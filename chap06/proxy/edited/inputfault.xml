@@ -1,0 +1,9 @@
+  <!--! <example xn="INPUTFAULT"> -->
+  <!--! <c>chap06</c><s>proxy</s> --> 
+    [java] Running test with null customer number.
+    [java] Mapped Exception (InputFault)
+    [java] InputFault.getMessage() =
+    [java] Input parameter failed validation.
+    [java] InputFault.getFaultInfo.getMsg() =
+    [java] Customer Number cannot be null.
+  <!--! </example> -->

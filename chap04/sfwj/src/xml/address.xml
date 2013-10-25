@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="address_xml"> -->
+<!--! <c>chap04</c><s>sfwj</s> -->
+<address>
+  <city>New City</city>
+  <phoneNumber>
+    <areaCode>758</areaCode>
+    <exchange>874</exchange>
+    <number>1221</number>
+  </phoneNumber>
+  <state>OH</state>
+  <streetName>Main Street - Suite 200</streetName>
+  <streetNum>175</streetNum>
+  <zip>59101</zip>
+</address>
+<!--! </example> -->

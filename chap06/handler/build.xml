@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="chap06-castor" basedir=".">
+  
+  <import file="${basedir}/../../common-build.xml"/>
+
+  <target name="run">
+    <delete quiet="true">
+      <fileset dir="${basedir}/target/persistedMessages"/>
+    </delete>
+    <mkdir dir="${basedir}/target/persistedMessages"/>
+    <java classname="samples.Client" fork="true">
+      <classpath>
+        <pathelement location="${basedir}/modules/client/target/chap06-handler-client-1.0.jar"/>
+        <pathelement location="${basedir}/modules/wsdl2java/target/chap06-handler-wsdl2java-1.0.jar"/>
+        <path refid="glassfish.webservices.path"/>
+      </classpath>
+      <arg value="${basedir}/target/persistedMessages"/>
+      <arg value="${glassfish.host}"/>
+      <arg value="${glassfish.deploy.port}"/>
+    </java>
+  </target>
+
+</project>

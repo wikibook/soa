@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:corp="http://www.example.com/corp"
+  targetNamespace="http://www.example.com/css/custinfo">
+  <xs:import namespace="http://www.example.com/corp"
+    schemaLocation="http://soabook.com/example/corp/standardtypes.xsd"/>
+  <xs:element name="address" type="corp:AddressType"/>
+</xs:schema>

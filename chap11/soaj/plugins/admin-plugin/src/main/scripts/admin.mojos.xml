@@ -1,0 +1,203 @@
+<pluginMetadata>
+  <mojos>
+
+    <mojo>
+      <goal>deploy</goal>
+      <call>deploy</call>
+      <parameters>
+        <parameter>
+          <name>artifact</name>
+          <property>artifact</property>
+          <expression>${artifact}</expression>
+          <required>true</required>
+          <type>java.lang.String</type>
+          <description>The file path of the artifact to deploy</description>
+        </parameter>
+        <parameter>
+          <name>host</name>
+          <property>host</property>
+          <required>true</required>
+          <defaultValue>localhost</defaultValue>
+          <type>java.lang.String</type>
+          <description>The machine name where GlassFish is deployed.</description>
+        </parameter>
+        <parameter>
+          <name>port</name>
+          <property>port</property>
+          <required>true</required>
+          <defaultValue>4848</defaultValue>
+          <type>java.lang.String</type>
+          <description>The administration port for GlassFish.</description>
+        </parameter>
+        <parameter>
+          <name>user</name>
+          <property>user</property>
+          <required>true</required>
+          <defaultValue>admin</defaultValue>
+          <type>java.lang.String</type>
+          <description>The GlassFish admin user name.</description>
+        </parameter>
+        <parameter>
+          <name>passfile</name>
+          <property>passfile</property>
+          <required>true</required>
+          <defaultValue>${user.home}/.glassfish.password</defaultValue>
+          <type>java.lang.String</type>
+          <description>The file path of the password file containing a line:
+            AS_ADMIN_ADMINPASSWORD=adminadmin</description>
+        </parameter>
+        <parameter>
+          <name>glassfish.home</name>
+          <property>glassfish.home</property>
+          <required>true</required>
+          <expression>${glassfish.home}</expression>
+          <type>java.lang.String</type>
+          <description>The file path of the directory where GlassFish is
+          installed"/></description>
+        </parameter>
+      </parameters>
+    </mojo>
+
+    <mojo>
+      <goal>undeploy</goal>
+      <call>undeploy</call>
+      <parameters>
+        <parameter>
+          <name>module</name>
+          <property>module</property>
+          <expression>${module}</expression>
+          <required>true</required>
+          <type>java.lang.String</type>
+          <description>The name of the module to undeploy</description>
+        </parameter>
+       <parameter>
+          <name>host</name>
+          <property>host</property>
+          <required>true</required>
+          <defaultValue>localhost</defaultValue>
+          <type>java.lang.String</type>
+          <description>The machine name where GlassFish is deployed.</description>
+        </parameter>
+        <parameter>
+          <name>port</name>
+          <property>port</property>
+          <required>true</required>
+          <defaultValue>4848</defaultValue>
+          <type>java.lang.String</type>
+          <description>The administration port for GlassFish.</description>
+        </parameter>
+        <parameter>
+          <name>user</name>
+          <property>user</property>
+          <required>true</required>
+          <defaultValue>admin</defaultValue>
+          <type>java.lang.String</type>
+          <description>The GlassFish admin user name.</description>
+        </parameter>
+        <parameter>
+          <name>passfile</name>
+          <property>passfile</property>
+          <required>true</required>
+          <defaultValue>${user.home}/.glassfish.password</defaultValue>
+          <type>java.lang.String</type>
+          <description>The file path of the password file containing a line:
+            AS_ADMIN_ADMINPASSWORD=adminadmin (encrypted)</description>
+        </parameter>
+        <parameter>
+          <name>glassfish.home</name>
+          <property>glassfish.home</property>
+          <required>true</required>
+          <expression>${glassfish.home}</expression>
+          <type>java.lang.String</type>
+          <description>The file path of the directory where GlassFish is
+            installed"/></description>
+        </parameter>
+      </parameters>
+    </mojo>
+
+    <mojo>
+      <goal>start-glassfish</goal>
+      <call>start-glassfish</call>
+      <parameters>
+        <parameter>
+          <name>domain</name>
+          <property>domain</property>
+          <expression>${domain}</expression>
+          <required>true</required>
+          <defaultValue>domain1</defaultValue>
+          <type>java.lang.String</type>
+          <description>The name domain to start.</description>
+        </parameter>
+        <parameter>
+          <name>user</name>
+          <property>user</property>
+          <required>true</required>
+          <defaultValue>admin</defaultValue>
+          <type>java.lang.String</type>
+          <description>The GlassFish admin user name.</description>
+        </parameter>
+        <parameter>
+          <name>passfile</name>
+          <property>passfile</property>
+          <required>true</required>
+          <defaultValue>${user.home}/.glassfish.password</defaultValue>
+          <type>java.lang.String</type>
+          <description>The file path of the password file containing a line:
+            AS_ADMIN_ADMINPASSWORD=adminadmin</description>
+        </parameter>
+        <parameter>
+          <name>glassfish.home</name>
+          <property>glassfish.home</property>
+          <required>true</required>
+          <expression>${glassfish.home}</expression>
+          <type>java.lang.String</type>
+          <description>The file path of the directory where GlassFish is
+            installed"/></description>
+        </parameter>
+      </parameters>
+    </mojo>
+
+    <mojo>
+      <goal>stop-glassfish</goal>
+      <call>stop-glassfish</call>
+      <parameters>
+        <parameter>
+          <name>domain</name>
+          <property>domain</property>
+          <expression>${domain}</expression>
+          <required>true</required>
+          <defaultValue>domain1</defaultValue>
+          <type>java.lang.String</type>
+          <description>The name domain to start.</description>
+        </parameter>
+        <parameter>
+          <name>user</name>
+          <property>user</property>
+          <required>true</required>
+          <defaultValue>admin</defaultValue>
+          <type>java.lang.String</type>
+          <description>The GlassFish admin user name.</description>
+        </parameter>
+        <parameter>
+          <name>passfile</name>
+          <property>passfile</property>
+          <required>true</required>
+          <defaultValue>${user.home}/.glassfish.password</defaultValue>
+          <type>java.lang.String</type>
+          <description>The file path of the password file containing a line:
+            AS_ADMIN_ADMINPASSWORD=adminadmin</description>
+        </parameter>
+        <parameter>
+          <name>glassfish.home</name>
+          <property>glassfish.home</property>
+          <required>true</required>
+          <expression>${glassfish.home}</expression>
+          <type>java.lang.String</type>
+          <description>The file path of the directory where GlassFish is
+            installed"/></description>
+        </parameter>
+      </parameters>
+    </mojo>
+
+  </mojos>
+</pluginMetadata>

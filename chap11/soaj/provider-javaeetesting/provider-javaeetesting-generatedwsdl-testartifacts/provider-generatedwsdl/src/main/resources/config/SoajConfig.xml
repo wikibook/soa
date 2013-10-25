@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soajConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://javector.com/soaj/config ../../../../../../../provider/src/main/resources/config/soaj-config.xsd"
+  xmlns:po="http://javector.com/ser/adaptive/po"
+  xmlns="http://javector.com/soaj/config">
+  <soajWSDL wsdlName="SoajProvider"
+    wsdlNamespace="http://javector.com/soaj/provider/generatedwsdl">
+    <soajService serviceName="SoajProviderService">
+      <soajPort portName="SoajProviderPort"
+        endpoint="http://localhost:8080/provider-generatedwsdl/soaj/test-sample">
+        <soajOperation operationName="getBillTo">
+          <soajPOJOMethod javaMethod="getBillTo"
+            javaClass="com.javector.soaj.test.ProviderTest">
+            <paramClass>com.javector.ser.adaptive.po.MyPurchaseOrder</paramClass>
+          </soajPOJOMethod>
+          <parameterMapping>
+            <javaClass>com.javector.ser.adaptive.po.MyPurchaseOrder</javaClass>
+            <xmlElement>
+              <eltRef>po:PurchaseOrder</eltRef>
+            </xmlElement>
+          </parameterMapping>
+          <returnMapping>
+            <javaClass>com.javector.ser.adaptive.po.Address</javaClass>
+            <xmlElement>
+              <eltName>po:billTo</eltName>
+              <eltType>po:billToType</eltType>
+            </xmlElement>
+          </returnMapping>
+        </soajOperation>
+
+         <soajOperation operationName="getBillToFromEJB30">
+          <soajEJB30Method javaMethod="getBillToFromEJB30"
+            javaClass="samples.EJB30Tester">
+            <paramClass>com.javector.ser.adaptive.po.MyPurchaseOrder</paramClass>
+          </soajEJB30Method>
+          <parameterMapping>
+            <javaClass>com.javector.ser.adaptive.po.MyPurchaseOrder</javaClass>
+            <xmlElement>
+              <eltRef>po:PurchaseOrder</eltRef>
+            </xmlElement>
+          </parameterMapping>
+          <returnMapping>
+            <javaClass>com.javector.ser.adaptive.po.Address</javaClass>
+            <xmlElement>
+              <eltName>po:billTo</eltName>
+              <eltType>po:billToType</eltType>
+            </xmlElement>
+          </returnMapping>
+        </soajOperation>
+
+
+          <soajOperation operationName="getBillToFromEJB21">
+          <soajEJB21Method javaMethod="getBillToFromEJB21"
+            javaClass="samples.EJB21Tester" jndiName="samples.EJB21TesterHome"
+            homeInterface="EJB21TesterHome" isLocal="false">
+            <paramClass>com.javector.ser.adaptive.po.MyPurchaseOrder</paramClass>
+          </soajEJB21Method>
+          <parameterMapping>
+            <javaClass>com.javector.ser.adaptive.po.MyPurchaseOrder</javaClass>
+            <xmlElement>
+              <eltRef>po:PurchaseOrder</eltRef>
+            </xmlElement>
+          </parameterMapping>
+          <returnMapping>
+            <javaClass>com.javector.ser.adaptive.po.Address</javaClass>
+            <xmlElement>
+              <eltName>po:billTo</eltName>
+              <eltType>po:billToType</eltType>
+            </xmlElement>
+          </returnMapping>
+        </soajOperation>
+
+      </soajPort>
+    </soajService>
+  </soajWSDL>
+  <!--
+  <mappingXml>config/SoajProviderMapping.xml</mappingXml>
+  <userDefinedXsds>config/SoajProviderSchema.xsd</userDefinedXsds>
+-->
+  <mappingXml>config/SoajProviderMapping.xml</mappingXml>
+  <userDefinedSchemas>
+    <userDefinedSchema>
+      <targetNamespace>http://javector.com/ser/adaptive/po</targetNamespace>
+      <schemaLocation>http://localhost:8080/provider-generatedwsdl/config/SoajProviderSchema.xsd</schemaLocation>
+    </userDefinedSchema>
+  </userDefinedSchemas>
+</soajConfiguration>

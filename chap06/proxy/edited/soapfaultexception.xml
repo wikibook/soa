@@ -1,0 +1,11 @@
+<!--! <example xn="SOAPFAULTEXCP"> -->
+<!--! <c>chap06</c><s>proxy</s> -->
+<SOAP-ENV:Fault xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <faultstring>Business logic exception</faultstring>
+  <faultcode>SOAP-ENV:Client</faultcode>
+  <detail>
+    <expiredCC xmlns="http://www.example.com/req"> Credit card has
+    expired</expiredCC>
+  </detail>
+</SOAP-ENV:Fault>
+<!--! </example> -->

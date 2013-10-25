@@ -1,0 +1,10 @@
+call mvn -f nodescriptor-sibonly/pom.xml clean install
+call mvn -f nodescriptor-sei/pom.xml clean install
+call mvn -f nodescriptor-wsdl/pom.xml clean install
+call mvn -f descriptor-webxml/pom.xml clean install
+call mvn -f descriptor-ejbjar/pom.xml clean install
+call mvn -f descriptor-webservice/pom.xml clean install
+call mvn -f descriptor-sunweb/pom.xml clean install
+call mvn -f descriptor-sunejbjar/pom.xml clean install
+call mvn -f autodeploy/pom.xml clean install
+call mvn -f catalog/pom.xml clean install

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--! <example xn="SOAP_FAULT"> -->
+<!--! <c>chap04</c><s>soap</s> -->
+<env1:Envelope xmlns:env1="http://schemas.xmlsoap.org/soap/envelope/">
+  <env1:Body>
+    <env1:Fault xmlns:faults="http://www.example.com/faults">
+      <faultcode>env1:Client</faultcode>
+      <faultstring>Bad input message.</faultstring>
+      <detail>
+        <faults:inputMessageValidationFailure
+          msg="The startDate is later than the endDate."/>
+      </detail>
+    </env1:Fault>
+  </env1:Body>
+</env1:Envelope>
+<!--! </example> -->

@@ -1,0 +1,31 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  
+  <goal name="build" prereqs="clean">
+    <attainGoal name="multiproject:install"/>
+  </goal>
+
+  <goal name="run-nonrecursive" prereqs="book:setenv">
+    <java classname="samples.MySimpleOrderSerializerNonRecursive"
+      failonerror="true" fork="true">
+      <classpath>
+        <path refid="glassfish.classpath"/>
+        <fileset dir="${basedir}/modules">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+  </goal>
+
+  <goal name="run-recursive" prereqs="book:setenv">>
+    <java classname="samples.MySimpleOrderSerializer"
+      failonerror="true" fork="true">
+      <classpath>
+        <path refid="glassfish.classpath"/>
+        <fileset dir="${basedir}/modules">
+          <include name="**/*.jar"/>
+        </fileset>
+      </classpath>
+    </java>
+  </goal>
+
+</project>

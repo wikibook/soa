@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soashopper-ear" basedir=".">
+  
+  <import file="${basedir}/../../common-build.xml"/>
+  <target name="gen-java" depends="clean">
+    <mkdir dir="${basedir}/target/work/java"/>
+    <mkdir dir="${basedir}/target/classes"/>
+    <exec executable="${wsimport}" failonerror="true">
+      <arg value="-d"/>
+      <arg value="${basedir}/target/classes"/>
+      <arg value="-s"/>
+      <arg value="${basedir}/target/work/java"/>
+      <arg value="-keep"/>
+      <arg value="${basedir}/src/xml/CustomerInformation.wsdl"/>
+    </exec>
+  </target>
+  
+</project>

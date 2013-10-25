@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="chap03-client-http" basedir=".">
+  
+  <import file="${basedir}/../../common-build.xml"/>
+  <property name="context-root" value="chap03-restget-endpoint-servlet-1.0"/>
+  
+  <!-- RUN: get the new orders and write the customer histories -->
+  <target name="run">
+    <mkdir dir="${user.home}/tmp"/>
+    <delete quiet="true">
+     <fileset dir="${user.home}/tmp" includes="soabook*.xml"/>
+    </delete>
+    <java classname="samples.OrderToCustHist" fork="true"
+      failonerror="true">
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/chap03-restget-endpoint-servlet-1.0/NewOrders"/>
+      <arg
+        value="http://${glassfish.host}:${glassfish.deploy.port}/chap03-restpost-endpoint-servlet-1.0/CustomerHistory?SourceSystem=OMS"/>
+      <arg value="${basedir}/etc/order_to_history.xslt"/>
+      <classpath>
+        <fileset dir="${basedir}">
+          <include name="**/*.jar"/>
+        </fileset>
+	<path refid="glassfish.webservices.path"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="bogus"><echo message="user.home=${user.home}"/></target>
+  
+</project>

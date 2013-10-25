@@ -1,0 +1,23 @@
+<projectDescription>
+  <name>provider-testartifact-generatedwsdl</name>
+  <comment/>
+  <projects>
+    <project>core</project>
+    <project>provider</project>
+    <project>adaptive-config</project>
+    <project>jaxbimp</project>
+    <project>provider-testartifact-ejb21</project>
+    <project>provider-testartifact-ejb30</project>
+    <project>adaptive</project>
+    <project>soaj-config</project>
+  </projects>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+      <arguments/>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>

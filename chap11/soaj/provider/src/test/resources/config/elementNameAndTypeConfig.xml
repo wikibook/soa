@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soajConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://javector.com/soaj/config ../../../main/resources/config/soaj-config.xsd"
+  xmlns:po="http://javector.com/ser/adaptive/po"
+  xmlns="http://javector.com/soaj/config">
+  <soajWSDL wsdlName="ElementNameAndTypeConfig"
+    wsdlNamespace="http://javector.com/soaj/test/wsdlgen/elementNameAndType">
+    <soajService serviceName="CreatePOService">
+      <soajPort portName="CreatePOPort"
+        endpoint="http://localhost:8080/soaj/wsdlgenTest/elementNameAndType">
+        <soajOperation operationName="createPO">
+          <soajPOJOMethod javaMethod="newPurchaseOrder"
+            javaClass="com.javector.soaj.wsdlgentest.po.PurchaseOrderFactoryImpl">
+            <paramClass>com.javector.soaj.wsdlgentest.po.PurchaseOrder</paramClass>
+          </soajPOJOMethod>
+          <parameterMapping>
+            <javaClass>java.util.List</javaClass>
+            <xmlElement>
+              <eltRef>po:items</eltRef>
+            </xmlElement>
+          </parameterMapping>
+          <parameterMapping>
+            <javaClass>com.javector.soaj.wsdlgentest.po.Address</javaClass>
+            <xmlElement>
+              <eltName>billingAddr</eltName>
+              <eltType>po:BillToType</eltType>
+            </xmlElement>
+          </parameterMapping>
+          <returnMapping>
+            <javaClass>com.javector.soaj.wsdlgentest.po.PurchaseOrder</javaClass>
+            <xmlElement>
+              <eltRef>po:purchaseOrder</eltRef>
+            </xmlElement>
+          </returnMapping>
+        </soajOperation>
+      </soajPort>
+    </soajService>
+  </soajWSDL>
+  <mappingXml>config/soajmapping.xml</mappingXml>
+  <userDefinedSchemas>
+    <userDefinedSchema>
+      <targetNamespace>http://javector.com/ser/adaptive/po</targetNamespace>
+      <schemaLocation>purchaseOrder.xsd</schemaLocation>
+    </userDefinedSchema>
+  </userDefinedSchemas>
+</soajConfiguration>

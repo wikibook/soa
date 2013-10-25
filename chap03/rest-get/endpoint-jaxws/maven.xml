@@ -1,0 +1,32 @@
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven">
+  
+  <goal name="build" prereqs="clean, war"/>
+  
+  <preGoal name="java:compile">
+    <attainGoal name="book:add-glassfish-to-classpath"/>
+  </preGoal>
+  
+  <goal name="deploy" prereqs="book:setenv">
+    <echo message="deploying: ${maven.build.dir}/${pom.artifactId}.war"/>
+    <exec executable="${glassfish.appsrvr}/bin/${asadmin}">
+      <arg value="deploy"/>
+      <arg value="--user"/>
+      <arg value="${glassfish.admin.user}"/>
+      <arg value="--passwordfile"/>
+      <arg value="${glassfish.admin.password.file}"/>
+      <arg value="${maven.build.dir}/${pom.artifactId}.war"/>
+    </exec>
+  </goal>
+  
+  <goal name="undeploy" prereqs="book:setenv">
+    <exec executable="${glassfish.appsrvr}/bin/${asadmin}">
+      <arg value="undeploy"/>
+      <arg value="--user"/>
+      <arg value="${glassfish.admin.user}"/>
+      <arg value="--passwordfile"/>
+      <arg value="${glassfish.admin.password.file}"/>
+      <arg value="${pom.artifactId}"/>
+    </exec>
+  </goal>
+
+</project>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <!--! <example xn="GEN_SCHEMA_FOR_ADDRESS_XML"> -->
+  <!--! <c>chap04</c><s>sfwj</s> -->
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:complexType name="address">
+    <xs:sequence>
+      <xs:element name="city" type="xs:string" minOccurs="0"/>
+      <xs:element name="phoneNumber" type="phone" minOccurs="0"/>
+      <xs:element name="state" type="state" minOccurs="0"/>
+      <xs:element name="streetName" type="xs:string" minOccurs="0"/>
+      <xs:element name="streetNum" type="xs:int"/>
+      <xs:element name="zip" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="phone">
+    <xs:sequence>
+      <xs:element name="areaCode" type="xs:int"/>
+      <xs:element name="exchange" type="xs:string" minOccurs="0"/>
+      <xs:element name="number" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="state">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OH"/>
+      <xs:enumeration value="IN"/>
+      <xs:enumeration value="TX"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+  <!--! </example> -->
+  
+
